@@ -87,6 +87,11 @@ SOFTWARE.
 #endif
 
 #if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
+/* ./src/regex/regoff_t.c */
+#ifndef __TYPE_regoff_t_DEFINED__
+#define __TYPE_regoff_t_DEFINED__
+typedef long long int                                                  regoff_t;
+
 /* ./src/regex/regex_t.c */
 #ifndef __TYPE_regex_t_DEFINED__
 #define __TYPE_regex_t_DEFINED__
@@ -103,11 +108,6 @@ typedef struct {
 	regoff_t rm_eo;
 } regmatch_t;
 #endif
-
-/* ./src/regex/regoff_t.c */
-#ifndef __TYPE_regoff_t_DEFINED__
-#define __TYPE_regoff_t_DEFINED__
-typedef long long int                                                  regoff_t;
 #endif
 
 #endif
