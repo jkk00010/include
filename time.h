@@ -105,15 +105,6 @@ struct tm {
 
 
 #if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
-/* ./src/time/struct_itimerspec.c */
-#ifndef __TYPE_struct_itimerspec_DEFINED__
-#define __TYPE_struct_itimerspec_DEFINED__
-struct itimerspec {
-	struct timespec it_interval;
-	struct timespec it_value;
-};
-#endif
-
 /* ./src/time/struct_timespec.c */
 #ifndef __TYPE_struct_timespec_DEFINED__
 #define __TYPE_struct_timespec_DEFINED__
@@ -123,6 +114,14 @@ struct timespec {
 };
 #endif
 
+/* ./src/time/struct_itimerspec.c */
+#ifndef __TYPE_struct_itimerspec_DEFINED__
+#define __TYPE_struct_itimerspec_DEFINED__
+struct itimerspec {
+	struct timespec it_interval;
+	struct timespec it_value;
+};
+#endif
 #endif
 
 #if	(defined _POSIX_SOURCE)
