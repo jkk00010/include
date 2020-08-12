@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
 #	if (_XOPEN_SOURCE >= 700)
 #		define _POSIX_C_SOURCE 200809L
@@ -35,6 +40,8 @@ SOFTWARE.
 #	elif (_XOPEN_SOURCE >= 500)
 #		define _POSIX_C_SOURCE 199506L
 #	else
+#		undef _XOPEN_SOURCE
+#		define _XOPEN_SOURCE 400
 #		define _POSIX_C_SOURCE 2
 #	endif
 #endif

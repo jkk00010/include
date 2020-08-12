@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
 /* ./src/syslog/LOG_ALERT.c */
 #define LOG_ALERT                                                         (1<<1)

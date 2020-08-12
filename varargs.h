@@ -28,18 +28,6 @@ SOFTWARE.
 */
 
 #if	(defined _XOPEN_SOURCE && _XOPEN_SOURCE < 600)
-/* ./src/varargs/va_alist.c */
-XOPEN(4,600);
-/* ./src/varargs/va_arg.c */
-XOPEN(4,600);
-/* ./src/varargs/va_dcl.c */
-XOPEN(4,600);
-/* ./src/varargs/va_end.c */
-XOPEN(4,600);
-/* ./src/varargs/va_list.c */
-XOPEN(4,600);
-/* ./src/varargs/va_start.c */
-XOPEN(4,600);
 #endif
 
 

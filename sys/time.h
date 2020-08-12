@@ -51,7 +51,7 @@ SOFTWARE.
 #ifndef __TYPE_fd_set_DEFINED__
 #define __TYPE_fd_set_DEFINED__
 typedef struct {
-	long fds_bits[];
+	long fds_bits[100];
 } fd_set;
 #endif
 
@@ -64,6 +64,15 @@ typedef long int                                                         time_t;
 #endif
 
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
+/* ./src/sys/time/struct_timeval.c */
+#ifndef __TYPE_struct_timeval_DEFINED__
+#define __TYPE_struct_timeval_DEFINED__
+struct timeval {
+	time_t tv_sec;
+	useconds_t tv_usec;
+};
+#endif
+
 /* ./src/sys/time/struct_itimerval.c */
 #ifndef __TYPE_struct_itimerval_DEFINED__
 #define __TYPE_struct_itimerval_DEFINED__
@@ -72,16 +81,6 @@ struct itimerval {
 	struct timeval it_value;
 };
 #endif
-
-/* ./src/sys/time/struct_timeval.c */
-#ifndef __TYPE_struct_timeval_DEFINED__
-#define __TYPE_struct_timeval_DEFINED__
-struct timeval {
-	time_t tv_sec;
-	suseconds_t tv_usec;
-};
-#endif
-
 #endif
 
 #if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)

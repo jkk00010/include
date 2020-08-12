@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if	(defined _XOPEN_SOURCE)
 /* ./src/curses/A_ATTRIBUTES.c */
 #define A_ATTRIBUTES                                                   (0x1ff00)

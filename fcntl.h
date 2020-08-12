@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
 #	if (_XOPEN_SOURCE >= 700)
 #		define _POSIX_C_SOURCE 200809L
@@ -158,5 +163,6 @@ int fcntl(int __fildes, int __cmd, ...);
 int open(const char *__path, int __oflag, ...);
 #endif
 
-
 #endif
+
+#include <ungol/fcntl.h>

@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if	(defined _XOPEN_SOURCE)
 /* ./src/search/ACTION.c */
 #ifndef __TYPE_ACTION_DEFINED__
@@ -95,7 +100,7 @@ void *tfind(const void * __key, void * const * __rootp, int (*__compar) (const v
 /* ./src/search/tsearch.c */
 void *tsearch(const void * __key, void ** __rootp, int (*__compar) (const void *, const void *));
 /* ./src/search/twalk.c */
-void twalk(const void * __root, void (*__action) (const void *, __VISIT, __int));
+void twalk(const void * __root, void (*__action) (const void *, VISIT, int));
 #endif
 
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))

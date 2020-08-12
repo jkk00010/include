@@ -141,7 +141,7 @@ struct semid_ds {
 /* ./src/sys/sem/semctl.c */
 int semctl(int __semid, int __semnum, int __cmd, ...);
 /* ./src/sys/sem/semget.c */
-int semget(__key_t, int __nsems, int __semflg);
+int semget(key_t __key, int __nsems, int __semflg);
 /* ./src/sys/sem/semop.c */
 int semop(int __semid, struct sembuf *__sops, size_t __nsops);
 #endif

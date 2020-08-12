@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
 /* ./src/utmpx/BOOT_TIME.c */
 #define BOOT_TIME /* TODO */
@@ -51,9 +56,9 @@ SOFTWARE.
 #ifndef __TYPE_struct_utmpx_DEFINED__
 #define __TYPE_struct_utmpx_DEFINED__
 struct utmpx {
-	char ut_user[];
-	char ut_id[];
-	char ut_line[];
+	char ut_user[100];
+	char ut_id[100];
+	char ut_line[100];
 	pid_t ut_pid;
 	short ut_type;
 	struct timeval ut_tv;

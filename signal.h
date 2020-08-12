@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
 #	if (_XOPEN_SOURCE >= 700)
 #		define _POSIX_C_SOURCE 200809L
@@ -337,6 +342,16 @@ struct sigaction {
 #endif
 
 #if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
+
+/* ./src/signal/union_sigval.c */
+#ifndef __TYPE_union_sigval_DEFINED__
+#define __TYPE_union_sigval_DEFINED__
+union sigval {
+	int sival_int;
+	void *sival_ptr;
+};
+#endif
+
 /* ./src/signal/struct_sigevent.c */
 #ifndef __TYPE_struct_sigevent_DEFINED__
 #define __TYPE_struct_sigevent_DEFINED__
@@ -346,15 +361,6 @@ struct sigevent {
 	union sigval sigev_value;
 	void (*sigev_notify_function)(union sigval);
 	pthread_attr_t *siegev_notify_attributes;
-};
-#endif
-
-/* ./src/signal/union_sigval.c */
-#ifndef __TYPE_union_sigval_DEFINED__
-#define __TYPE_union_sigval_DEFINED__
-union sigval {
-	int sival_int;
-	void *sival_ptr;
 };
 #endif
 

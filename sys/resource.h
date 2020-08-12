@@ -43,7 +43,7 @@ SOFTWARE.
 /* ./src/sys/resource/RLIMIT_DATA.c */
 #define RLIMIT_DATA /* TODO */
 /* ./src/sys/resource/RLIMIT_FSIZE.c */
-#define RLIMIT_FSIZE /* TODO */
+#define RLIMIT_FSIZE 1 /* TODO */
 /* ./src/sys/resource/RLIMIT_NOFILE.c */
 #define RLIMIT_NOFILE /* TODO */
 /* ./src/sys/resource/RLIMIT_STACK.c */
@@ -75,21 +75,21 @@ struct rlimit {
 };
 #endif
 
+/* src/sys/time/struct_timeval.c */
+#ifndef __TYPE_struct_timeval_DEFINED__
+#define __TYPE_struct_timeval_DEFINED__
+struct timeval {
+	time_t tv_sec;
+	useconds_t tv_usec;
+};
+#endif
+
 /* ./src/sys/resource/struct_rusage.c */
 #ifndef __TYPE_struct_rusage_DEFINED__
 #define __TYPE_struct_rusage_DEFINED__
 struct rusage {
 	struct timeval ru_utime;
 	struct timeval ru_stime;
-};
-#endif
-
-/* src/sys/time/struct_timeval.c */
-#ifndef __TYPE_struct_timeval_DEFINED__
-#define __TYPE_struct_timeval_DEFINED__
-struct timeval {
-	time_t tv_sec;
-	suseconds_t tv_usec;
 };
 #endif
 

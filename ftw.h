@@ -27,6 +27,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 400
+#endif
+
 #if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
 #	if (_XOPEN_SOURCE >= 700)
 #		define _POSIX_C_SOURCE 200809L
@@ -113,7 +118,7 @@ int ftw(const char * __path, int (*__fn) (const char *, const struct stat * __pt
 
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
 /* ./src/ftw/nftw.c */
-int nftw(const char * __path, int (*__fn) (const char *, const struct stat *, __int, struct FTW *), int __fd_limit, int __flags);
+int nftw(const char * __path, int (*__fn) (const char *, const struct stat *, int, struct FTW *), int __fd_limit, int __flags);
 #endif
 
 
