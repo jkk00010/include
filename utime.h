@@ -48,6 +48,14 @@ SOFTWARE.
 #	define _POSIX_SOURCE
 #endif
 
+#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
+#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
+#		error POSIX.1-2001 and later require a C99 compiler
+#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
+#		error XOPEN Issue 6 and later require a C99 compiler
+#	endif
+#endif
+
 #if	(defined _POSIX_C_SOURCE && 200112 <= _POSIX_C_SOURCE) || \
 	(defined _XOPEN_SOURCE)
 /* src/time/time_t.c */

@@ -32,6 +32,14 @@ SOFTWARE.
 #define _XOPEN_SOURCE 400
 #endif
 
+#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
+#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
+#		error POSIX.1-2001 and later require a C99 compiler
+#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
+#		error XOPEN Issue 6 and later require a C99 compiler
+#	endif
+#endif
+
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
 /* ./src/fmtmsg/MM_APPL.c */
 #define MM_APPL                                                                3

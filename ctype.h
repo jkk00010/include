@@ -27,6 +27,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
+#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
+#		error POSIX.1-2001 and later require a C99 compiler
+#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
+#		error XOPEN Issue 6 and later require a C99 compiler
+#	endif
+#endif
+
 #if	(defined _XOPEN_SOURCE)
 /* ./src/ctype/_tolower.c */
 #define _tolower(__c)                                               tolower(__c)
