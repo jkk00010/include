@@ -3,7 +3,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/* ./src/assert/assert.c */
 #undef assert
-#ifdef NDEBUG
-#define assert(__exp) ((void)0)
+
+#if defined NDEBUG
+#	define assert(__exp) ((void)0)
+
 #else
-#if __STDC_VERSION__ < 199901L
-#define __func__ ((char*)0)
-#endif
-#define assert(__exp) \
-	((void)((__exp) || (__assert(#__exp, __FILE__, __LINE__, __func__),  0)))
+#	if (!defined __SDTC_VERSION__) || __STDC_VERSION__ < 199901L
+#		define __func__ ((char*)0)
+#	endif
+
+#	define assert(__exp) \
+		((void)((__exp) || (__assert(#__exp, __FILE__, __LINE__, __func__),  0)))
+
 #endif
 
-/* ./src/assert/__assert.c */
+#if (!defined __SDTC_VERSION__) || __STDC_VERSION__ < 199901L
+#undef __func__
+#endif
+
 void __assert(const char *__expr, const char *__file, int __line, const char *__func);
-

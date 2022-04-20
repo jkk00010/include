@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,42 +56,30 @@ SOFTWARE.
 #	endif
 #endif
 
+#ifndef _POSIX_SOURCE
+#	error <grp.h> requires _POSIX_SOURCE, _POSIX_C_SOURCE, or _XOPEN_SOURCE
+#define
+
 #if	(defined _XOPEN_SOURCE)
-/* src/sys/types/gid_t.c */
-#ifndef __TYPE_gid_t_DEFINED__
-#define __TYPE_gid_t_DEFINED__
+#ifndef __gid_t_DEFINED__
+#define __gid_t_DEFINED__
 typedef                                                        unsigned long int
 	gid_t;
 #endif
-
 #endif
 
-#if	(defined _POSIX_SOURCE)
-/* ./src/grp/struct_group.c */
-#ifndef __TYPE_struct_group_DEFINED__
-#define __TYPE_struct_group_DEFINED__
 struct group {
 	char *	gr_name;
 	gid_t	gr_gid;
 	char **	gr_mem;
 };
-#endif
 
-#endif
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/grp/getgrgid.c */
-struct group * getgrgid(gid_t __gid);
-/* ./src/grp/getgrnam.c */
-struct group * getgrnam(const char * __name);
-#endif
+struct group * getgrgid(gid_t);
+struct group * getgrnam(const char *);
 
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/grp/endgrent.c */
 void endgrent(void);
-/* ./src/grp/getgrent.c */
 struct group * getgrent(void);
-/* ./src/grp/setgrent.c */
 void setgrent(void);
 #endif
 

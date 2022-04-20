@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,30 +27,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
-/* ./src/iso646/and.c */
-#define and                                                                   &&
-/* ./src/iso646/and_eq.c */
-#define and_eq                                                                &=
-/* ./src/iso646/bitand.c */
-#define bitand                                                                 &
-/* ./src/iso646/bitor.c */
-#define bitor                                                                  |
-/* ./src/iso646/compl.c */
-#define compl                                                                  ~
-/* ./src/iso646/not.c */
-#define not                                                                    !
-/* ./src/iso646/not_eq.c */
-#define not_eq                                                                !=
-/* ./src/iso646/or.c */
-#define or                                                                    ||
-/* ./src/iso646/or_eq.c */
-#define or_eq                                                                 |=
-/* ./src/iso646/xor.c */
-#define xor                                                                    ^
-/* ./src/iso646/xor_eq.c */
-#define xor_eq                                                                ^=
+#if !(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
+#	error <iso646.h> requires C95 or higher
 #endif
 
+#define and                                                                   &&
+#define and_eq                                                                &=
+#define bitand                                                                 &
+#define bitor                                                                  |
+#define compl                                                                  ~
+#define not                                                                    !
+#define not_eq                                                                !=
+#define or                                                                    ||
+#define or_eq                                                                 |=
+#define xor                                                                    ^
+#define xor_eq                                                                ^=
 
 #endif

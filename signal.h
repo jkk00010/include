@@ -269,7 +269,7 @@ typedef volatile int                                               sig_atomic_t;
 /* ./src/signal/sigset_t.c */
 #ifndef __TYPE_sigset_t_DEFINED__
 #define __TYPE_sigset_t_DEFINED__
-typedef unsigned int                                                   sigset_t;
+typedef struct { __bits[32] }                                                   sigset_t;
 #endif
 
 #endif

@@ -770,11 +770,11 @@ int winnstr(WINDOW * __win, char * __str, int __n);
 /* ./src/curses/innwstr.c */
 int winnwstr(WINDOW * __win, wchar_t * __wstr, int __n);
 /* ./src/curses/ins_nwstr.c */
-int ins_nwstr(WINDOW * __win, const wchar_t * __wstr, int __n);
+int wins_nwstr(WINDOW * __win, const wchar_t * __wstr, int __n);
 /* ./src/curses/ins_wch.c */
-int ins_wch(WINDOW * __win, const cchar_t * __wch);
+int wins_wch(WINDOW * __win, const cchar_t * __wch);
 /* ./src/curses/ins_wstr.c */
-int ins_wstr(WINDOW * __win, const wchar_t * __wstr);
+int wins_wstr(WINDOW * __win, const wchar_t * __wstr);
 /* ./src/curses/insdelln.c */
 int winsdelln(WINDOW * __win, int __n);
 /* ./src/curses/insnstr.c */
@@ -880,7 +880,7 @@ chtype termattrs(void);
 /* ./src/curses/termname.c */
 char * termname(void);
 /* ./src/curses/timeout.c */
-void wtimeout(int __delay);
+void wtimeout(WINDOW * __win, int __delay);
 /* ./src/curses/touchline.c */
 int touchline(WINDOW * __win, int __start, int __count);
 /* ./src/curses/unget_wch.c */

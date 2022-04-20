@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,31 +54,32 @@ SOFTWARE.
 #	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
 #		error XOPEN Issue 6 and later require a C99 compiler
 #	endif
+#	define restrict /* forward compatibility */
 #endif
 
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
-/* ./src/aio/AIO_ALLDONE.c */
+#if	(defined _POSIX_C_SOURCE && 199309L <= _POSIX_C_SOURCE)
 #define AIO_ALLDONE                                                            0
-/* ./src/aio/AIO_CANCELED.c */
 #define AIO_CANCELED                                                           1
-/* ./src/aio/AIO_NOTCANCELED.c */
 #define AIO_NOTCANCELED                                                        2
-/* ./src/aio/LIO_NOP.c */
 #define LIO_NOP                                                                0
-/* ./src/aio/LIO_NOWAIT.c */
 #define LIO_NOWAIT                                                             1
-/* ./src/aio/LIO_READ.c */
 #define LIO_READ                                                               2
-/* ./src/aio/LIO_WAIT.c */
 #define LIO_WAIT                                                               3
-/* ./src/aio/LIO_WRITE.c */
 #define LIO_WRITE                                                              4
+
+#if	(200809L <= _POSIX_C_SOURE)
+/* from <sys/types.h> */
+typedef int off_t;
+typedef int pthread_attr_t;
+typedef int size_t;
+typedef int ssize_t;
+/* from <time.h> */
+struct timespec {};
+/* from <signal.h> */
+union sigval;
+struct sigevent;
 #endif
 
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
-/* ./src/aio/struct_aiocb.c */
-#ifndef __TYPE_struct_aiocb_DEFINED__
-#define __TYPE_struct_aiocb_DEFINED__
 struct aiocb {
 	int		aio_fildes;
 	off_t		aio_offset;
@@ -88,32 +89,15 @@ struct aiocb {
 	struct sigevent	aio_sigevent;
 	int		aio_lio_opcode;
 };
-#endif
 
-#endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
-/* ./src/aio/aio_cancel.c */
 int aio_cancel(int __fildes, struct aiocb *__aiocbp);
-/* ./src/aio/aio_error.c */
 int aio_error(const struct aiocb * __aiocbp);
-/* ./src/aio/aio_fsync.c */
 int aio_fsync(int __op, struct aiocb * __aiocbp);
-/* ./src/aio/aio_read.c */
 int aio_read(struct aiocb * __aiocbp);
-/* ./src/aio/aio_return.c */
 ssize_t aio_return(struct aiocb *__aiocbp);
-/* ./src/aio/aio_suspend.c */
 int aio_suspend(const struct aiocb * const list[], int __nent, const struct timespec * __timeout);
-/* ./src/aio/aio_write.c */
 int aio_write(struct aiocb * __aiocbp);
-/* ./src/aio/lio_listio.c */
 int lio_listio(int __mode, struct aiocb * const list[restrict], int __nent, struct sigevent * restrict __sig);
 #endif
-
 
 #endif

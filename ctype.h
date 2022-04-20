@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/* TODO: full POSIX tests */
+
 #if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
 #	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
 #		error POSIX.1-2001 and later require a C99 compiler
@@ -36,50 +38,51 @@ SOFTWARE.
 #endif
 
 #if	(defined _XOPEN_SOURCE)
-/* ./src/ctype/_tolower.c */
 #define _tolower(__c)                                               tolower(__c)
-/* ./src/ctype/_toupper.c */
 #define _toupper(__c)                                               toupper(__c)
 #endif
 
-/* ./src/ctype/isalnum.c */
-int isalnum(int __c);
-/* ./src/ctype/isalpha.c */
-int isalpha(int __c);
-/* ./src/ctype/iscntrl.c */
-int iscntrl(int __c);
-/* ./src/ctype/isdigit.c */
-int isdigit(int __c);
-/* ./src/ctype/isgraph.c */
-int isgraph(int __c);
-/* ./src/ctype/islower.c */
-int islower(int __c);
-/* ./src/ctype/isprint.c */
-int isprint(int __c);
-/* ./src/ctype/ispunct.c */
-int ispunct(int __c);
-/* ./src/ctype/isspace.c */
-int isspace(int __c);
-/* ./src/ctype/isupper.c */
-int isupper(int __c);
-/* ./src/ctype/isxdigit.c */
-int isxdigit(int __c);
-/* ./src/ctype/tolower.c */
-int tolower(int __c);
-/* ./src/ctype/toupper.c */
-int toupper(int __c);
+int isalnum(int);
+int isalpha(int);
+int iscntrl(int);
+int isdigit(int);
+int isgraph(int);
+int islower(int);
+int isprint(int);
+int ispunct(int);
+int isspace(int);
+int isupper(int);
+int isxdigit(int);
+int tolower(int);
+int toupper(int);
 
-#if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-/* ./src/ctype/isblank.c */
-int isblank(int __c);
+#if	(defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+int isblank(int);
 #endif
 
 #if	(defined _XOPEN_SOURCE)
-/* ./src/ctype/isascii.c */
-int isascii(int __c);
-/* ./src/ctype/toascii.c */
-int toascii(int __c);
+int isascii(int);
+int toascii(int);
 #endif
 
+#if	(defined _POSIX_C_SOURCE && 200809L <= _POSIX_C_SOURCE)
+/* from <locale.h> */
+typedef int locale_t;
+
+int isalnum_l(int, locale_t);
+int isalpha_l(int, locale_t);
+int isblank_l(int, locale_t);
+int iscntrl_l(int, locale_t);
+int isdigit_l(int, locale_t);
+int isgraph_l(int, locale_t);
+int islower_l(int, locale_t);
+int isprint_l(int, locale_t);
+int ispunct_l(int, locale_t);
+int isspace_l(int, locale_t);
+int isupper_l(int, locale_t);
+int isxdigit_l(int, locale_t);
+int tolower_l(int, locale_t);
+int toupper_l(int, locale_t);
+#endif
 
 #endif

@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,49 +57,27 @@ SOFTWARE.
 #endif
 
 #if	(defined _POSIX_SOURCE)
-/* ./src/cpio/C_IRGRP.c */
 #define C_IRGRP                                                          0000040
-/* ./src/cpio/C_IROTH.c */
 #define C_IROTH                                                          0000004
-/* ./src/cpio/C_IRUSR.c */
 #define C_IRUSR                                                          0000400
-/* ./src/cpio/C_ISBLK.c */
 #define C_ISBLK                                                          0060000
-/* ./src/cpio/C_ISCHR.c */
 #define C_ISCHR                                                          0020000
-/* ./src/cpio/C_ISCTG.c */
 #define C_ISCTG                                                          0110000
-/* ./src/cpio/C_ISDIR.c */
 #define C_ISDIR                                                          0040000
-/* ./src/cpio/C_ISFIFO.c */
 #define C_ISFIFO                                                         0010000
-/* ./src/cpio/C_ISGID.c */
 #define C_ISGID                                                          0002000
-/* ./src/cpio/C_ISLNK.c */
 #define C_ISLNK                                                          0120000
-/* ./src/cpio/C_ISREG.c */
 #define C_ISREG                                                          0100000
-/* ./src/cpio/C_ISSOCK.c */
 #define C_ISSOCK                                                         0140000
-/* ./src/cpio/C_ISUID.c */
 #define C_ISUID                                                          0004000
-/* ./src/cpio/C_ISVTX.c */
 #define C_ISVTX                                                          0001000
-/* ./src/cpio/C_IWGRP.c */
 #define C_IWGRP                                                          0000020
-/* ./src/cpio/C_IWOTH.c */
 #define C_IWOTH                                                          0000002
-/* ./src/cpio/C_IWUSR.c */
 #define C_IWUSR                                                          0000200
-/* ./src/cpio/C_IXGRP.c */
 #define C_IXGRP                                                          0000010
-/* ./src/cpio/C_IXOTH.c */
 #define C_IXOTH                                                          0000001
-/* ./src/cpio/C_IXUSR.c */
 #define C_IXUSR                                                          0000100
-/* ./src/cpio/MAGIC.c */
 #define MAGIC                                                           "070707"
 #endif
-
 
 #endif

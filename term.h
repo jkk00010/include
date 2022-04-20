@@ -986,7 +986,7 @@ typedef int bool;
 
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
 /* ./src/term/TERMINAL.c */
-extern typdef struct __TERMINAL TERMINAL;
+typedef struct __TERMINAL TERMINAL;
 /* ./src/term/cur_term.c */
 extern TERMINAL * cur_term;
 #endif
@@ -1011,7 +1011,7 @@ char * tigetstr(const char * __capname);
 /* ./src/term/tiparm.c */
 char * tiparm(const char * __cap, ...);
 /* ./src/term/tparm.c */
-char * tiparm(const char * __cap, long __p1, long __p2, long __p3, long __p4, long __p5, long __p6, long __p7, long __p8, long __p9);
+char * tparm(const char * __cap, long __p1, long __p2, long __p3, long __p4, long __p5, long __p6, long __p7, long __p8, long __p9);
 /* ./src/term/tputs.c */
 int tputs(const char * __str, int __affcnt, int (*__putfunc)(int));
 #endif

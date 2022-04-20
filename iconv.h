@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,31 +54,19 @@ SOFTWARE.
 #	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
 #		error XOPEN Issue 6 and later require a C99 compiler
 #	endif
+#	define restrict	/* compatibility */
 #endif
 
-#if	(defined _POSIX_C_SOURCE && 200809 <= _POSIX_C_SOURCE) || \
+#if !(defined _POSIX_C_SOURCE && 200809 <= _POSIX_C_SOURCE) || \
 	(defined _XOPEN_SOURCE)
-/* ./src/iconv/iconv_t.c */
-#ifndef __TYPE_iconv_t_DEFINED__
-#define __TYPE_iconv_t_DEFINED__
+#	error <iconv.h> requires _POSIX_C_SOURCE >= 200809 or _XOPEN_SOURCE
+#endif
+
 typedef unsigned long int                                               iconv_t;
-#endif
 
-#endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-#if	(defined _POSIX_C_SOURCE && 200809 <= _POSIX_C_SOURCE) || \
-	(defined _XOPEN_SOURCE)
-/* ./src/iconv/iconv.c */
-size_t iconv(iconv_t __cd, char ** restrict __inbuf, size_t * restrict __inbytesleft, char ** restrict __outbuf, size_t * restrict __outbytesleft);
-/* ./src/iconv/iconv_close.c */
-int iconv_close(iconv_t __cd);
-/* ./src/iconv/iconv_open.c */
-iconv_t iconv_open(const char * __tocode, const char * __fromcode);
-#endif
-
+size_t iconv(iconv_t, char ** restrict, size_t * restrict, char ** restrict,
+	size_t * restrict);
+int iconv_close(iconv_t);
+iconv_t iconv_open(const char *, const char *);
 
 #endif

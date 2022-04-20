@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,22 +57,13 @@ SOFTWARE.
 #endif
 
 #if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
-/* ./src/fnmatch/FNM_NOESCAPE.c */
 #define FNM_NOESCAPE                                                      (1<<2)
-/* ./src/fnmatch/FNM_NOMATCH.c */
 #define FNM_NOMATCH                                                         (-1)
-/* ./src/fnmatch/FNM_NOSYS.c */
 #define FNM_NOSYS                                                           (-2)
-/* ./src/fnmatch/FNM_PATHNAME.c */
 #define FNM_PATHNAME                                                      (1<<0)
-/* ./src/fnmatch/FNM_PERIOD.c */
 #define FNM_PERIOD                                                        (1<<1)
-#endif
 
-#if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
-/* ./src/fnmatch/fnmatch.c */
-int fnmatch(const char * __pattern, const char * __string, int __flags);
+int fnmatch(const char *, const char *, int);
 #endif
-
 
 #endif

@@ -40,22 +40,14 @@ SOFTWARE.
 #	endif
 #endif
 
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE) && _XOPEN_SOURCE < 600)
-/* ./src/libgen/__loc1.c */
-extern char *__loc1;
-#endif
-
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/libgen/basename.c */
 char * basename(char * __path);
-/* ./src/libgen/dirname.c */
 char * dirname(char * __path);
 #endif
 
 #if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE) && _XOPEN_SOURCE < 600)
-/* ./src/libgen/regcmp.c */
+extern char *__loc1;
 char *regcmp(const char *__string1, ... /*, (char*)0 */);
-/* ./src/libgen/regex.c */
 char *regex(const char *__re, const char *__subject, ...);
 #endif
 

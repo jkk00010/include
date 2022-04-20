@@ -54,56 +54,32 @@ SOFTWARE.
 #	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
 #		error XOPEN Issue 6 and later require a C99 compiler
 #	endif
+#	define restrict	/* compatibility */
 #endif
 
-#if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
-/* ./src/glob/GLOB_ABORTED.c */
+#if !(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
+#	error <glob.h> requires _POSIX_C_SOURCE >= 2
+#endif
+
 #define GLOB_ABORTED                                                           1
-/* ./src/glob/GLOB_APPEND.c */
 #define GLOB_APPEND                                                       (1<<0)
-/* ./src/glob/GLOB_DOOFFS.c */
 #define GLOB_DOOFFS                                                       (1<<1)
-/* ./src/glob/GLOB_ERR.c */
 #define GLOB_ERR                                                          (1<<2)
-/* ./src/glob/GLOB_MARK.c */
 #define GLOB_MARK                                                         (1<<3)
-/* ./src/glob/GLOB_NOCHECK.c */
 #define GLOB_NOCHECK                                                      (1<<4)
-/* ./src/glob/GLOB_NOESCAPE.c */
 #define GLOB_NOESCAPE                                                     (1<<5)
-/* ./src/glob/GLOB_NOMATCH.c */
 #define GLOB_NOMATCH                                                           2
-/* ./src/glob/GLOB_NOSORT.c */
 #define GLOB_NOSORT                                                       (1<<6)
-/* ./src/glob/GLOB_NOSPACE.c */
 #define GLOB_NOSPACE                                                           3
-/* ./src/glob/GLOB_NOSYS.c */
 #define GLOB_NOSYS                                                          (-2)
-#endif
 
-#if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
-/* ./src/glob/glob_t.c */
-#ifndef __TYPE_glob_t_DEFINED__
-#define __TYPE_glob_t_DEFINED__
 typedef struct {
 	size_t	gl_pathc;
 	char **	gl_pathv;
 	size_t	gl_offs;
 } glob_t;
-#endif
 
-#endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-#if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
-/* ./src/glob/glob.c */
-int glob(const char * restrict __pattern, int __flags, int (*__errfunc) (const char * __epath, int __eerrno), glob_t * restrict __pglob);
-/* ./src/glob/globfree.c */
-void globfree(glob_t * __pglob);
-#endif
-
+int glob(const char * restrict, int, int (*) (const char *, int), glob_t * restrict);
+void globfree(glob_t *);
 
 #endif

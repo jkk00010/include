@@ -6,7 +6,7 @@ UNG's Not GNU
 
 MIT License
 
-Copyright (c) 2011-2020 Jakob Kaivo <jkk@ung.org>
+Copyright (c) 2011-2022 Jakob Kaivo <jkk@ung.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,47 +52,32 @@ SOFTWARE.
 #endif
 
 #if	(defined _POSIX_SOURCE)
-/* ./src/dirent/DIR.c */
-#ifndef __TYPE_DIR_DEFINED__
-#define __TYPE_DIR_DEFINED__
-typedef struct __DIR                                                        DIR;
+typedef                                                             struct __DIR
+	DIR;
+
+#if	(defined _XOPEN_SOURCE)
+/* from <sys/types.h> */
+typedef unsigned long long int ino_t;
 #endif
 
-#endif
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/dirent/struct_dirent.c */
-#ifndef __TYPE_struct_dirent_DEFINED__
-#define __TYPE_struct_dirent_DEFINED__
 struct dirent {
 	#if (defined _XOPEN_SOURCE)
-	ino_t d_ino;
+		ino_t d_ino;
 	#else
-	unsigned long long int __padding;
+		unsigned long long int __padding;
 	#endif
 	char d_name[];
 };
-#endif
 
-#endif
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/dirent/closedir.c */
-int closedir(DIR *__dirp);
-/* ./src/dirent/opendir.c */
-DIR * opendir(const char * __dirname);
-/* ./src/dirent/readdir.c */
-struct dirent * readdir(DIR * __dirp);
-/* ./src/dirent/rewinddir.c */
-void rewinddir(DIR * __dirp);
+int closedir(DIR *);
+DIR * opendir(const char *);
+struct dirent * readdir(DIR *);
+void rewinddir(DIR *);
 #endif
 
 #if	(defined _XOPEN_SOURCE)
-/* ./src/dirent/seekdir.c */
-void seekdir(DIR * __dirp, long __loc);
-/* ./src/dirent/telldir.c */
-long telldir(DIR * __dirp);
+void seekdir(DIR *, long);
+long telldir(DIR *);
 #endif
-
 
 #endif
