@@ -46,7 +46,7 @@ SOFTWARE.
 #define FLT_MIN_10_EXP                                                     (-37)
 #define FLT_MIN_EXP                                                       (-125)
 #define FLT_RADIX                                                            (2)
-#define FLT_ROUNDS                                                  fegetround()
+#define FLT_ROUNDS                                                (fegetround())
 #define LDBL_DIG                                                            (15)
 #define LDBL_EPSILON                                              (2.220446E-16)
 #define LDBL_MANT_DIG                                                       (53)
@@ -57,7 +57,7 @@ SOFTWARE.
 #define LDBL_MIN_10_EXP                                                    (-37)
 #define LDBL_MIN_EXP                                                     (-1021)
 
-#if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
+#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
 #define DECIMAL_DIG                                                         (10)
 #define FLT_EVAL_METHOD                                                     (-1)
 #endif
