@@ -27,8 +27,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if !(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
-#	error <iso646.h> requires C95 or higher
+#if !(defined __STDC_VERSION__ && 199409L <= __STDC_VERSION__)
+# error <iso646.h> requires C95 or higher
 #endif
 
 #define and                                                                   &&
