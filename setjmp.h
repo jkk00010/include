@@ -27,73 +27,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
+/* TODO: XOPEN/POSIX/etc */
 
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
-
-/* ./src/setjmp/jmp_buf.c */
-#ifndef __TYPE_jmp_buf_DEFINED__
-#define __TYPE_jmp_buf_DEFINED__
 typedef unsigned long int                                           jmp_buf[32];
+
+#if (defined __STDC__VERSION__ && 201112L <= __STDC_VERSION__)
+_Noreturn
 #endif
+void longjmp(jmp_buf, int);
+int setjmp(jmp_buf);
 
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/setjmp/sigjmp_buf.c */
-#ifndef __TYPE_sigjmp_buf_DEFINED__
-#define __TYPE_sigjmp_buf_DEFINED__
+#if (defined _POSIX_SOURCE)
 typedef jmp_buf                                                      sigjmp_buf;
+void siglongjmp(sigjmp_buf, int);
+int sigsetjmp(sigjmp_buf, int);
 #endif
 
+#if (defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
+void _longjmp(jmp_buf, int);
+int _setjmp(jmp_buf);
 #endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 200112L)
-#define _Noreturn
-#endif
-
-/* ./src/setjmp/longjmp.c */
-_Noreturn void longjmp(jmp_buf __env, int __val);
-/* ./src/setjmp/setjmp.c */
-int setjmp(jmp_buf __env);
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/setjmp/siglongjmp.c */
-void siglongjmp(sigjmp_buf __env, int __val);
-/* ./src/setjmp/sigsetjmp.c */
-int sigsetjmp(sigjmp_buf __env, int __savemask);
-#endif
-
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/setjmp/_longjmp.c */
-void _longjmp(jmp_buf __env, int __val);
-/* ./src/setjmp/_setjmp.c */
-int _setjmp(jmp_buf __env);
-#endif
-
 
 #endif
