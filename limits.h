@@ -27,81 +27,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
-
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
+/* TODO: XOPEN/POSIX/etc. */
 
 #define CHAR_BIT                                                             (8)
+
 #ifdef __CHAR_IS_UNSIGNED__
 #define CHAR_MAX                                                           (255)
-#else
-#define CHAR_MAX                                                           (127)
-#endif
-#ifdef __CHAR_IS_UNSIGNED__
 #define CHAR_MIN                                                             (0)
 #else
+#define CHAR_MAX                                                           (127)
 #define CHAR_MIN                                                          (-128)
 #endif
+
 #if defined __LP32__
 #define INT_MAX                                                          (32767)
+#define UINT_MAX                                                        (65535U)
 #elif defined __ILP32__ || defined __LLP64__ || defined __LP64__
 #define INT_MAX                                                     (2147483647)
+#define UINT_MAX                                                   (4294967295U)
 #elif defined __ILP64__
 #define INT_MAX                                            (9223372036854775807)
+#define UINT_MAX                                         (18446744073709551616U)
 #endif
 #define INT_MIN                                                    (-INT_MAX -1)
+
 #if defined __LP32__ || defined __ILP32__ || defined __LLP64__
 #define LONG_MAX                                                   (2147483647L)
+#define ULONG_MAX                                                 (4294967295UL)
 #elif defined __ILP64__ || defined __LP64__
 #define LONG_MAX                                          (9223372036854775807L)
+#define ULONG_MAX                                       (18446744073709551615UL)
 #endif
 #define LONG_MIN                                                (-LONG_MAX - 1L)
+
 #define MB_LEN_MAX                                                           (4)
 #define SCHAR_MAX                                                          (127)
 #define SCHAR_MIN                                                         (-128)
 #define SHRT_MAX                                                         (32767)
 #define SHRT_MIN                                                        (-32768)
 #define UCHAR_MAX                                                          (255)
-#if defined __LP32__
-#define UINT_MAX                                                        (65535U)
-#elif defined __ILP32__ || defined __LLP64__ || defined __LP64__
-#define UINT_MAX                                                   (4294967295U)
-#elif defined __ILP64__
-#define UINT_MAX                                         (18446744073709551616U)
-#endif
-#if defined __LP32__ || defined __ILP32__ || defined __LLP64__
-#define ULONG_MAX                                                 (4294967295UL)
-#elif defined __ILP64__ || defined __LP64__
-#define ULONG_MAX                                       (18446744073709551615UL)
-#endif
 #define USHRT_MAX                                                        (65535)
 
-#if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
+#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
 #define LLONG_MAX                                        (9223372036854775807LL)
 #define LLONG_MIN                                             (-LLONG_MAX - 1LL)
 #define ULLONG_MAX                                     (18446744073709551615ULL)
