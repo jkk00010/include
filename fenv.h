@@ -32,7 +32,7 @@ SOFTWARE.
 #endif
 
 #define FE_ALL_EXCEPT (FE_DIVBYZERO|FE_INEXACT|FE_INVALID|FE_OVERFLOW|FE_UNDERFLOW)
-#define FE_DFL_ENV                                                (__FE_DFL_ENV)
+#define FE_DFL_ENV                                               (&__FE_DFL_ENV)
 #define FE_DIVBYZERO                                                      (1<<0)
 #define FE_DOWNWARD                                                          (3)
 #define FE_INEXACT                                                        (1<<1)
@@ -58,6 +58,6 @@ int fesetround(int);
 int fetestexcept(int);
 int feupdateenv(const fenv_t *);
 
-extern const fenv_t *__FE_DFL_ENV;
+extern const fenv_t __FE_DFL_ENV;
 
 #endif
