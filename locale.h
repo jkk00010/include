@@ -27,34 +27,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
-
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
+/* TODO: XOPEN/POSIX/etc */
 
 #define LC_ALL                                                               (0)
 #define LC_COLLATE                                                           (1)
@@ -64,8 +37,11 @@ SOFTWARE.
 #define LC_TIME                                                              (5)
 #define NULL                                                          ((void*)0)
 
-#if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
+#if (defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
 #define LC_MESSAGES                                                          (6)
+# if 200809L <= _POSIX_C_SOURCE
+  typedef int locale_t;	/* TODO */
+# endif
 #endif
 
 struct lconv {
@@ -104,9 +80,14 @@ struct lconv {
 	#endif
 };
 
-
 struct lconv * localeconv(void);
-char * setlocale(int __category, const char *__locale);
+char * setlocale(int, const char *);
 
+#if (defined _POSIX_C_SOURCE && 200809L <= _POSIX_C_SOURCE)
+locale_t duplocale(locale_t);
+void freelocale(locale_t);
+locale_t newlocale(int, const char *, locale_t);
+locale_t uselocale(locale_t);
+#endif
 
 #endif
