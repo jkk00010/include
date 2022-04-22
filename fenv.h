@@ -28,7 +28,7 @@ SOFTWARE.
 */
 
 #if !(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-#error "<fenv.h> requires C99 or higher"
+# error "<fenv.h> requires C99 or higher"
 #endif
 
 #define FE_ALL_EXCEPT (FE_DIVBYZERO|FE_INEXACT|FE_INVALID|FE_OVERFLOW|FE_UNDERFLOW)
