@@ -27,10 +27,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if	!(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-#	error <inttypes.h> requires C99 or higher
-#endif
+/* TODO: replace WORD_BIT with __LP32__, __ILP32__, __ILP64__, __LLP64__ */
 
+#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
 #include <stdint.h>
 
 #define PRIX16                                                              "hX"
@@ -277,8 +276,6 @@ typedef struct {
 	intmax_t quot;
 	intmax_t rem;
 } imaxdiv_t;
-typedef long long int intmax_t;
-typedef unsigned long long int uintmax_t;
 
 intmax_t imaxabs(intmax_t);
 imaxdiv_t imaxdiv(intmax_t, intmax_t);
@@ -286,5 +283,10 @@ intmax_t strtoimax(const char * restrict, char ** restrict, int);
 uintmax_t strtoumax(const char *restrict, char ** restrict, int);
 intmax_t wcstoimax(const wchar_t * restrict, wchar_t ** restrict, int);
 uintmax_t wcstoumax(const wchar_t * restrict, wchar_t ** restrict, int);
+#endif
+
+#if (defined _XOPEN_SOURCE && 500 <= _XOPEN_SOURCE && _XOPEN_SOURCE < 600)
+/* TODO: {u,}int{8,16,32,64}_t, {u,}intptr_t */
+#endif
 
 #endif
