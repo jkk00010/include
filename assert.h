@@ -27,20 +27,19 @@ SOFTWARE.
 #undef assert
 
 #if defined NDEBUG
-#	define assert(__exp) ((void)0)
-
+# define assert(__exp) ((void)0)
 #else
-#	if (!defined __SDTC_VERSION__) || __STDC_VERSION__ < 199901L
-#		define __func__ ((char*)0)
-#	endif
-
-#	define assert(__exp) \
-		((void)((__exp) || (__assert(#__exp, __FILE__, __LINE__, __func__),  0)))
-
+# if (defined __STDC_VERSION__) && (199901L <= __STDC_VERSION__)
+#  define assert(__exp) \
+       ((void)((__exp) || (__assert(#__exp, __FILE__, __LINE__, __func__), 0)))
+# else
+#  define assert(__exp) \
+       ((void)((__exp) || (__assert(#__exp, __FILE__, __LINE__, (char*)0), 0)))
+# endif
 #endif
 
-#if (!defined __SDTC_VERSION__) || __STDC_VERSION__ < 199901L
-#undef __func__
+#if (defined __STDC_VERSION__) && (201112L <= __STDC_VERSION)
+# define static_assert _Static_Assert
 #endif
 
-void __assert(const char *__expr, const char *__file, int __line, const char *__func);
+void __assert(const char *, const char *, int, const char *);
