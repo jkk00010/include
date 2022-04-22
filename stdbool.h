@@ -27,16 +27,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-/* ./src/stdbool/__bool_true_false_are_defined.c */
-#define __bool_true_false_are_defined                                        (1)
-/* ./src/stdbool/bool.c */
-#define bool                                                               _Bool
-/* ./src/stdbool/false.c */
-#define false                                                                (0)
-/* ./src/stdbool/true.c */
-#define true                                                                 (1)
+#if !(defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+# error <stdbool.h> requires C99 or higher
 #endif
 
+#define __bool_true_false_are_defined                                        (1)
+#define bool                                                               _Bool
+#define false                                                                (0)
+#define true                                                                 (1)
 
 #endif
