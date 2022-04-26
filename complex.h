@@ -1,5 +1,9 @@
-#ifndef __COMPLEX_H__
-#define __COMPLEX_H__
+#ifndef __STDC_VERSION_COMPLEX_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_COMPLEX_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_COMPLEX_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -27,11 +31,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if !(defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+#if (__STDC_VERSION_COMPLEX_H__ < 199901L)
 #error "<complex.h> requires C99 or higher"
 #endif
 
-#if (defined __STDC_NO_COMPLES__)
+#if (defined __STDC_NO_COMPLEX__)
 #error "<complex.h> requies compiler support"
 #endif
 
@@ -53,7 +57,7 @@ SOFTWARE.
 							float _Complex __c; \
 							float __f[2]; \
 						}){ .__f = { 0.0, 1.0 } }).__c)
-#if	(201112L <= __STDC_VERSION__)
+#if	(201112L <= __STDC_VERSION_COMPLEX_H__)
 #	ifdef __STDC_IEC_559_COMPLEX__
 #		define CMPLX(__x, __y) \
 		((double complex)((double)(__x) + _Imaginary_I * (double)(__y)))

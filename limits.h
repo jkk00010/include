@@ -1,5 +1,9 @@
-#ifndef __LIMITS_H__
-#define __LIMITS_H__
+#ifndef __STDC_VERSION_LIMITS_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_LIMITS_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_LIMITS_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -68,7 +72,7 @@ SOFTWARE.
 #define UCHAR_MAX                                                          (255)
 #define USHRT_MAX                                                        (65535)
 
-#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+#if (199901L <= __STDC_VERSION_LIMITS_H__)
 #define LLONG_MAX                                        (9223372036854775807LL)
 #define LLONG_MIN                                             (-LLONG_MAX - 1LL)
 #define ULLONG_MAX                                     (18446744073709551615ULL)

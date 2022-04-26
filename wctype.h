@@ -1,5 +1,9 @@
-#ifndef __WCTYPE_H__
-#define __WCTYPE_H__
+#ifndef __STDC_VERSION_WCTYPE_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_WCTYPE_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_WCTYPE_H__ 1
+#endif
 
 /*
 UNG's Not GNU

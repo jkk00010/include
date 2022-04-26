@@ -1,5 +1,9 @@
-#ifndef __INTTYPES_H__
-#define __INTTYPES_H__
+#ifndef __STDC_VERSION_INTTYPES_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_INTTYPES_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_INTTYPES_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -29,7 +33,7 @@ SOFTWARE.
 
 /* TODO: replace WORD_BIT with __LP32__, __ILP32__, __ILP64__, __LLP64__ */
 
-#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+#if (199901L <= __STDC_VERSION_INTTYPES_H__)
 #include <stdint.h>
 
 #define PRIX16                                                              "hX"

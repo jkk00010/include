@@ -1,5 +1,9 @@
-#ifndef __FLOAT_H__
-#define __FLOAT_H__
+#ifndef __STDC_VERSION_FLOAT_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_FLOAT_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_FLOAT_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -57,7 +61,7 @@ SOFTWARE.
 #define LDBL_MIN_10_EXP                                                    (-37)
 #define LDBL_MIN_EXP                                                     (-1021)
 
-#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+#if (199901L <= __STDC_VERSION_FLOAT_H__)
 #define DECIMAL_DIG                                                         (10)
 #define FLT_EVAL_METHOD                                                     (-1)
 #endif

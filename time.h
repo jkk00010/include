@@ -1,5 +1,9 @@
-#ifndef __TIME_H__
-#define __TIME_H__
+#ifndef __STDC_VERSION_TIME_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_TIME_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_TIME_H__ 1
+#endif
 
 /*
 UNG's Not GNU

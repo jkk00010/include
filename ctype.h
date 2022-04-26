@@ -1,5 +1,9 @@
-#ifndef __CTYPE_H__
-#define __CTYPE_H__
+#ifndef __STDC_VERSION_CTYPE_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_CTYPE_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_CTYPE_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -43,7 +47,7 @@ int isxdigit(int);
 int tolower(int);
 int toupper(int);
 
-#if (defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+#if (199901L <= __STDC_VERSION_CTYPE_H__)
 int isblank(int);
 #endif
 

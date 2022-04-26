@@ -1,5 +1,9 @@
-#ifndef __ERRNO_H__
-#define __ERRNO_H__
+#ifndef __STDC_VERSION_ERRNO_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_ERRNO_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_ERRNO_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -27,44 +31,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
-
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
+/* TODO: XOPEN/POSIX/etc. */
 
 #define EDOM                                                                 (1)
 #define ERANGE                                                               (2)
 #define errno                                                       (*__errno())
 
-#if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
+#if (199504L <= __STDC_VERSION_ERRNO_H__)
 #define EILSEQ                                                               (3)
 #endif
 
-#if	(defined _POSIX_SOURCE)
+#if (201107L <= __STDC_VERSION_ERRNO_H__ && defined __STDC_WANT_LIB_EXT1__)
+typedef int                                                             errno_t;
+#endif
+
+#if (defined _POSIX_SOURCE)
 #define E2BIG                                                               (10)
 #define EACCES                                                              (11)
 #define EAGAIN                                                              (12)
@@ -97,6 +78,7 @@ SOFTWARE.
 #define EPERM                                                               (39)
 #define EPIPE                                                               (40)
 #define EROFS                                                               (41)
+#define ESPIPE                                                              (42)
 #define ESRCH                                                               (43)
 #define EXDEV                                                               (44)
 #endif

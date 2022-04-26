@@ -1,5 +1,9 @@
-#ifndef __LOCALE_H__
-#define __LOCALE_H__
+#ifndef __STDC_VERSION_LOCALE_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_LOCALE_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_LOCALE_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -63,7 +67,7 @@ struct lconv {
 	char n_sep_by_space;
 	char p_sign_posn;
 	char n_sign_posn;
-	#if __STDC_VERSION__ >= 199901L
+	#if __STDC_VERSION_LOCALE_H__ >= 199901L
 	char int_p_cs_precedes;
 	char int_p_sep_by_space;
 	char int_n_cs_precedes;

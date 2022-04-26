@@ -1,5 +1,9 @@
-#ifndef __FENV_H__
-#define __FENV_H__
+#ifndef __STDC_VERSION_FENV_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_FENV_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_FENV_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -27,7 +31,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if !(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
+#if (__STDC_VERSION_FENV_H__ < 199901L)
 # error "<fenv.h> requires C99 or higher"
 #endif
 

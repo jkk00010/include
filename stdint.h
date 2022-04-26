@@ -1,5 +1,9 @@
-#ifndef __STDINT_H__
-#define __STDINT_H__
+#ifndef __STDC_VERSION_STDINT_H__
+#if defined __STDC_VERSION__
+#define __STDC_VERSION_STDINT_H__ __STDC_VERSION__
+#else
+#define __STDC_VERSION_STDINT_H__ 1
+#endif
 
 /*
 UNG's Not GNU
