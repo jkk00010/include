@@ -101,7 +101,7 @@ SOFTWARE.
 /* ./src/math/HUGE_VALL.c */
 #define HUGE_VALL                  0.0  /* TODO: massive positive long double */
 /* ./src/math/INFINITY.c */
-#define INFINITY                9e999 /* TODO: positive or unsigned float infinity */
+#define INFINITY __builtin_inff()
 /* ./src/math/MATH_ERREXCEPT.c */
 #define MATH_ERREXCEPT                                                         2
 /* ./src/math/MATH_ERRNO.c */
