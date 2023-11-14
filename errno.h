@@ -148,3 +148,7 @@ typedef int                                                             errno_t;
 int *__errno(void);
 
 #endif
+
+#ifdef __linux__
+#include <ungol/errno.h>
+#endif
