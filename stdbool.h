@@ -31,7 +31,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if !(defined __STDC_VERSION__ && 199901L <= __STDC_VERSION__)
+#if (__STDC_VERSION_STDBOOL_H__ < 199901L)
 # error <stdbool.h> requires C99 or higher
 #endif
 
