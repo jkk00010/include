@@ -121,7 +121,7 @@ struct tm {
 #endif
 
 
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
+#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE) || (201112 <= __STDC_VERSION__)
 /* ./src/time/struct_timespec.c */
 #ifndef __TYPE_struct_timespec_DEFINED__
 #define __TYPE_struct_timespec_DEFINED__
