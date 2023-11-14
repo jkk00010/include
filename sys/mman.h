@@ -65,7 +65,7 @@ SOFTWARE.
 /* ./src/sys/mman/MAP_FIXED.c */
 #define MAP_FIXED /* TODO */
 /* ./src/sys/mman/MAP_PRIVATE.c */
-#define MAP_PRIVATE /* TODO */
+#define MAP_PRIVATE 0x02
 /* ./src/sys/mman/MAP_SHARED.c */
 #define MAP_SHARED /* TODO */
 /* ./src/sys/mman/MS_ASYNC.c */
@@ -79,9 +79,9 @@ SOFTWARE.
 /* ./src/sys/mman/PROT_NONE.c */
 #define PROT_NONE /* TODO */
 /* ./src/sys/mman/PROT_READ.c */
-#define PROT_READ /* TODO */
+#define PROT_READ 1
 /* ./src/sys/mman/PROT_WRITE.c */
-#define PROT_WRITE /* TODO */
+#define PROT_WRITE 2
 #endif
 
 #if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
