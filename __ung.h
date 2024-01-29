@@ -178,6 +178,8 @@
 #ifndef __UNG_H
 #define __UNG_H
 
+void __checked(const char *, const char *, unsigned long long, void(*)(), ...);
 int __checked_i(const char *, const char *, unsigned long long, int(*)(), ...);
+void * __checked_p(const char *, const char *, unsigned long long, void *(*)(), ...);
 
 #endif
