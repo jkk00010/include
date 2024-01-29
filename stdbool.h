@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #if (__STDC_VERSION_STDBOOL_H__ < 199901L)
 # error <stdbool.h> requires C99 or higher
 #endif
