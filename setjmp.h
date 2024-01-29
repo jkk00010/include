@@ -1,5 +1,9 @@
-#ifndef __SETJMP_H__
-#define __SETJMP_H__
+#ifndef __STDC_SETJMP_H__
+#if defined __STDC_VERSION__
+#define __STDC_SETJMP_H__ __STDC_VERSION__
+#else
+#define __STDC_SETJMP_H__ 1
+#endif
 
 /*
 UNG's Not GNU
@@ -27,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 /* TODO: XOPEN/POSIX/etc */
 
 typedef unsigned long int                                           jmp_buf[32];
@@ -36,6 +42,13 @@ _Noreturn
 #endif
 void longjmp(jmp_buf, int);
 int setjmp(jmp_buf);
+
+/*
+#define longjmp(__j, __i) \
+	__checked(__FILE__, __func__, __LINE__, longjmp, __j, __i)
+#define setjmp(__j) \
+	__checked_i(__FILE__, __func__, __LINE__, setjmp, __j)
+*/
 
 #if (defined _POSIX_SOURCE)
 typedef jmp_buf                                                      sigjmp_buf;
