@@ -31,7 +31,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/* TODO: XOPEN/POSIX/etc */
+#include <__ung.h>
 
 #define LC_ALL                                                               (0)
 #define LC_COLLATE                                                           (1)
@@ -87,11 +87,9 @@ struct lconv {
 struct lconv * localeconv(void);
 char * setlocale(int, const char *);
 
-#if (defined _POSIX_C_SOURCE && 200809L <= _POSIX_C_SOURCE)
-locale_t duplocale(locale_t);
-void freelocale(locale_t);
-locale_t newlocale(int, const char *, locale_t);
-locale_t uselocale(locale_t);
-#endif
+#define localeconv() \
+	(struct lconv*)__checked_p(__FILE__, __func__, __LINE__, localeconv)
+#define setlocale(__i, __s) \
+	(char*)__checked_p(__FILE__, __func__, __LINE__, localeconv, __i, __s)
 
 #endif
