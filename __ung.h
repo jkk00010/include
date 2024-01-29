@@ -79,7 +79,9 @@
 #endif
 
 #ifdef restrict
+#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
 #error Undefined Behavior: Keyword restrict is defined as a macro
+#endif
 #endif
 
 #ifdef return
@@ -180,6 +182,11 @@
 
 void __checked(const char *, const char *, unsigned long long, void(*)(), ...);
 int __checked_i(const char *, const char *, unsigned long long, int(*)(), ...);
+long __checked_l(const char *, const char *, unsigned long long, int(*)(), ...);
 void * __checked_p(const char *, const char *, unsigned long long, void *(*)(), ...);
+
+#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)                 
+#define restrict                                                                
+#endif 
 
 #endif
