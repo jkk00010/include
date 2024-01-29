@@ -31,7 +31,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/* TODO: full POSIX tests */
+#include <__ung.h>
 
 int isalnum(int);
 int isalpha(int);
@@ -47,35 +47,25 @@ int isxdigit(int);
 int tolower(int);
 int toupper(int);
 
+extern int __checked_i(const char *, const char *, unsigned long long, int(*)(), ...);
+
+#define isalnum(__c) __checked_i(__FILE__, __func__, __LINE__, isalnum, __c)
+#define isalpha(__c) __checked_i(__FILE__, __func__, __LINE__, isalpha, __c)
+#define iscntrl(__c) __checked_i(__FILE__, __func__, __LINE__, iscntrl, __c)
+#define isdigit(__c) __checked_i(__FILE__, __func__, __LINE__, isdigit, __c)
+#define isgraph(__c) __checked_i(__FILE__, __func__, __LINE__, isgraph, __c)
+#define islower(__c) __checked_i(__FILE__, __func__, __LINE__, islower, __c)
+#define isprint(__c) __checked_i(__FILE__, __func__, __LINE__, isprint, __c)
+#define ispunct(__c) __checked_i(__FILE__, __func__, __LINE__, ispunct, __c)
+#define isspace(__c) __checked_i(__FILE__, __func__, __LINE__, isspace, __c)
+#define isupper(__c) __checked_i(__FILE__, __func__, __LINE__, isupper, __c)
+#define isxdigit(__c) __checked_i(__FILE__, __func__, __LINE__, isxdigit, __c)
+#define tolower(__c) __checked_i(__FILE__, __func__, __LINE__, tolower, __c)
+#define toupper(__c) __checked_i(__FILE__, __func__, __LINE__, toupper, __c)
+
 #if (199901L <= __STDC_VERSION_CTYPE_H__)
 int isblank(int);
-#endif
-
-#if (defined _POSIX_C_SOURCE && 200809L <= _POSIX_C_SOURCE)
-/* TODO: as in <locale.h> */ typedef int locale_t;
-
-int isalnum_l(int, locale_t);
-int isalpha_l(int, locale_t);
-int isblank_l(int, locale_t);
-int iscntrl_l(int, locale_t);
-int isdigit_l(int, locale_t);
-int isgraph_l(int, locale_t);
-int islower_l(int, locale_t);
-int isprint_l(int, locale_t);
-int ispunct_l(int, locale_t);
-int isspace_l(int, locale_t);
-int isupper_l(int, locale_t);
-int isxdigit_l(int, locale_t);
-int tolower_l(int, locale_t);
-int toupper_l(int, locale_t);
-#endif
-
-#if (defined _XOPEN_SOURCE)
-#define _tolower(__c)                                               tolower(__c)
-#define _toupper(__c)                                               toupper(__c)
-
-int isascii(int);
-int toascii(int);
+#define isblank(__c) __checked_i(__FILE__, __func__, __LINE__, isblank, __c)
 #endif
 
 #endif
