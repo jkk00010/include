@@ -173,3 +173,11 @@
 #ifdef _Thread_local
 #error Undefined Behavior: Keyword _Thread_local is defined as a macro
 #endif
+
+/* multiple-inclusion guard happens here so that keywords are always checked */
+#ifndef __UNG_H
+#define __UNG_H
+
+int __checked_i(const char *, const char *, unsigned long long, int(*)(), ...);
+
+#endif

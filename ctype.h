@@ -47,8 +47,6 @@ int isxdigit(int);
 int tolower(int);
 int toupper(int);
 
-extern int __checked_i(const char *, const char *, unsigned long long, int(*)(), ...);
-
 #define isalnum(__c) __checked_i(__FILE__, __func__, __LINE__, isalnum, __c)
 #define isalpha(__c) __checked_i(__FILE__, __func__, __LINE__, isalpha, __c)
 #define iscntrl(__c) __checked_i(__FILE__, __func__, __LINE__, iscntrl, __c)
