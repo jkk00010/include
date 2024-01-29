@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #if (__STDC_VERSION_FENV_H__ < 199901L)
 # error "<fenv.h> requires C99 or higher"
 #endif
@@ -61,6 +63,29 @@ int fesetexceptflag(const fexcept_t *, int);
 int fesetround(int);
 int fetestexcept(int);
 int feupdateenv(const fenv_t *);
+
+#define feclearexcept(__i) \
+	__checked_i(__FILE__, __func__, __LINE__, feclearexcept, __i)
+#define fegetenv(__f) \
+	__checked_i(__FILE__, __func__, __LINE__, fegetenv, __f)
+#define fegetexceptflag(__f, __i) \
+	__checked_i(__FILE__, __func__, __LINE__, fegetexceptflag, __f, __i)
+#define fegetround() \
+	__checked_i(__FILE__, __func__, __LINE__, fegetround)
+#define feholdexcept(__f) \
+	__checked_i(__FILE__, __func__, __LINE__, feholdexcept, __f)
+#define feraiseexcept(__i) \
+	__checked_i(__FILE__, __func__, __LINE__, feraiseexcept, __i)
+#define fesetenv(__f) \
+	__checked_i(__FILE__, __func__, __LINE__, fesetenv, __f)
+#define fesetexceptflag(__f, __i) \
+	__checked_i(__FILE__, __func__, __LINE__, fesetexceptflag, __f, __i)
+#define fesetround(__i) \
+	__checked_i(__FILE__, __func__, __LINE__, fesetround, __i)
+#define fetestexcept(__i) \
+	__checked_i(__FILE__, __func__, __LINE__, fetestexcept, __i)
+#define feupdateenv(__f) \
+	__checked_i(__FILE__, __func__, __LINE__, feupdateenv, __f)
 
 extern const fenv_t __FE_DFL_ENV;
 
