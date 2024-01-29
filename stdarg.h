@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #define va_arg(__ap, __type)                      __builtin_va_arg(__ap, __type)
 #define va_end(__ap)                                      __builtin_va_end(__ap)
 #define va_start(__ap, __parmN)                __builtin_va_start(__ap, __parmN)
