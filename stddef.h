@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #define NULL                                                          ((void*)0)
 #define offsetof(__type, __member)  ((size_t)((void*)&(((__type*)0)->__member)))
 
