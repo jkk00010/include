@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #if (__STDC_VERSION_ISO646_H__ < 199409L)
 # error <iso646.h> requires C95 or higher
 #endif
