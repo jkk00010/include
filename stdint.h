@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
 /* ./src/stdint/INT16_C.c */
 #define INT16_C(__value)                                ((int_least16_t)__value)
