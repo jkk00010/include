@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <ung.h>
+
 #define DBL_DIG                                                             (15)
 #define DBL_EPSILON                                               (2.220446E-16)
 #define DBL_MANT_DIG                                                        (53)
