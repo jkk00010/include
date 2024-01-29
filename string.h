@@ -31,39 +31,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
+#include <__ung.h>
 
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
-
-/* src/stddef/NULL.c */
 #define NULL                                                          ((void*)0)
 
-/* src/stddef/size_t.c */
 #ifndef __TYPE_size_t_DEFINED__
 #define __TYPE_size_t_DEFINED__
 #ifdef __LLP64__
@@ -77,66 +48,94 @@ typedef unsigned long int                                                size_t;
 #endif
 #endif
 
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-/* ./src/string/memchr.c */
 void * memchr(const void *__s, int __c, size_t __n);
-/* ./src/string/memcmp.c */
 int memcmp(const void *__s1, const void *__s2, size_t __n);
-/* ./src/string/memcpy.c */
 void * memcpy(void * restrict __s1, const void * restrict __s2, size_t __n);
-/* ./src/string/memmove.c */
 void * memmove(void *__s1, const void *__s2, size_t __n);
-/* ./src/string/memset.c */
 void * memset(void *__s, int __c, size_t __n);
-/* ./src/string/strcat.c */
 char * strcat(char * restrict __s1, const char * restrict __s2);
-/* ./src/string/strchr.c */
 char * strchr(const char *__s, int __c);
-/* ./src/string/strcmp.c */
 int strcmp(const char *__s1, const char *__s2);
-/* ./src/string/strcoll.c */
 int strcoll(const char *__s1, const char *__s2);
-/* ./src/string/strcpy.c */
 char * strcpy(char * restrict __s1, const char * restrict __s2);
-/* ./src/string/strcspn.c */
 size_t strcspn(const char *__s1, const char *__s2);
-/* ./src/string/strerror.c */
 char * strerror(int __errnum);
-/* ./src/string/strlen.c */
 size_t strlen(const char *__s);
-/* ./src/string/strncat.c */
 char * strncat(char * restrict __s1, const char * restrict __s2, size_t __n);
-/* ./src/string/strncmp.c */
 int strncmp(const char *__s1, const char *__s2, size_t __n);
-/* ./src/string/strncpy.c */
 char * strncpy(char * restrict __s1, const char * restrict __s2, size_t __n);
-/* ./src/string/strpbrk.c */
 char * strpbrk(const char *__s1, const char *__s2);
-/* ./src/string/strrchr.c */
 char * strrchr(const char *__s, int __c);
-/* ./src/string/strspn.c */
 size_t strspn(const char *__s1, const char *__s2);
-/* ./src/string/strstr.c */
 char * strstr(const char *__s1, const char *__s2);
-/* ./src/string/strtok.c */
 char * strtok(char * restrict __s1, const char * restrict __s2);
-/* ./src/string/strxfrm.c */
 size_t strxfrm(char * restrict __s1, const char * restrict __s2, size_t __n);
 
-#if	(defined _POSIX_C_SOURCE && 200809 <= _POSIX_C_SOURCE) || \
-	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/string/strdup.c */
-char * strdup(const char *__s);
-#endif
 
-#if	(defined _XOPEN_SOURCE)
-/* ./src/string/memccpy.c */
-void *memccpy(void * restrict __s1, const void * restrict __s2, int __c, size_t __n);
-#endif
+#define memchr(__s, __c, __n) \
+	__checked__p(__FILE__, __func__, __LINE__, memchr, __s, __c, __n)
 
+#define memcmp(__s1, __s2, __n) \
+	__checked__i(__FILE__, __func__, __LINE__, memcmp, __s1, __s2, __n)
+
+#define memcpy(__s1, __s2, __n) \
+	__checked__p(__FILE__, __func__, __LINE__, memcpy, __s1, __s2, __n)
+
+#define memmove(__s1, __s2, __n) \
+	__checked__p(__FILE__, __func__, __LINE__, memmove, __s1, __s2, __n)
+
+#define memset(__s, __c, __n) \
+	__checked__p(__FILE__, __func__, __LINE__, memset, __s, __c, __n)
+
+#define strcat(__s1, __s2) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strcat, __s1, __s2)
+
+#define strchr(__s, __c) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strchr, __s, __c)
+
+#define strcmp(__s1, __s2) \
+	__checked__i(__FILE__, __func__, __LINE__, strcmp, __s1, __s2)
+
+#define strcoll(__s1, __s2) \
+	__checked__i(__FILE__, __func__, __LINE__, strcoll, __s1, __s2)
+
+#define strcpy(__s1, __s2) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strcpy, __s1, __s2)
+
+#define strcspn(__s1, __s2) \
+	__checked__s(__FILE__, __func__, __LINE__, strcspn, __s1, __s2)
+
+#define strerror(__e) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strerror, __e)
+
+#define strlen(__s) \
+	__checked__s(__FILE__, __func__, __LINE__, strlen, __s)
+
+#define strncat(__s1, __s2, __n) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strncat, __s1, __s2, __n)
+
+#define strncmp(__s1, __s2, __n) \
+	__checked__i(__FILE__, __func__, __LINE__, strncmp, __s1, __s2, __n)
+
+#define strncpy(__s1, __s2, __n) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strncpy, __s1, __s2, __n)
+
+#define strpbrk(__s1, __s2) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strpbrk, __s1, __s2)
+
+#define strrchr(__s, __c) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strrchr, __s, __c)
+
+#define strspn(__s1, __s2) \
+	__checked__s(__FILE__, __func__, __LINE__, strspn, __s1, __s2)
+
+#define strstr(__s1, __s2) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strstr, __s1, __s2)
+
+#define strtok(__s1, __s2) \
+	(char*)__checked__p(__FILE__, __func__, __LINE__, strtok, __s1, __s2)
+
+#define strxfrm(__s1, __s2, __n) \
+	__checked__s(__FILE__, __func__, __LINE__, strxfrm, __s1, __s2, __n)
 
 #endif
