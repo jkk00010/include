@@ -31,103 +31,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
+#include <__ung.h>
 
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
-
-
-/* ./src/stdio/BUFSIZ.c */
 #define BUFSIZ                                                            (4096)
-/* ./src/stdio/EOF.c */
 #define EOF                                                                 (-1)
-/* ./src/stdio/FILENAME_MAX.c */
 #define FILENAME_MAX                                                       (255)
-/* ./src/stdio/FOPEN_MAX.c */
 #define FOPEN_MAX                                                            (8)
-/* ./src/stdio/L_tmpnam.c */
 #define L_tmpnam                                                           (255)
-/* ./src/stdio/SEEK_CUR.c */
 #define SEEK_CUR                                                             (1)
-/* ./src/stdio/SEEK_END.c */
 #define SEEK_END                                                             (2)
-/* ./src/stdio/SEEK_SET.c */
 #define SEEK_SET                                                             (3)
-/* ./src/stdio/TMP_MAX.c */
 #define TMP_MAX                                                          (10000)
-/* ./src/stdio/_IOFBF.c */
 #define _IOFBF                                                               (1)
-/* ./src/stdio/_IOLBF.c */
 #define _IOLBF                                                               (2)
-/* ./src/stdio/_IONBF.c */
 #define _IONBF                                                               (3)
-/* ./src/stdio/stderr.c */
 #define stderr                                                          __stderr
-/* ./src/stdio/stdin.c */
 #define stdin                                                            __stdin
-/* ./src/stdio/stdout.c */
 #define stdout                                                          __stdout
-/* src/stddef/NULL.c */
 #define NULL                                                          ((void*)0)
 
-#if	(defined _POSIX_SOURCE)
-/* ./src/stdio/L_ctermid.c */
-#define L_ctermid                                                          (255)
-#endif
-
-#if	(defined _POSIX_SOURCE && (!defined _POSIX_C_SOURCE || _POSIX_C_SOURCE < 200112))
-/* ./src/stdio/L_cuserid.c */
-#define L_cuserid                                                          (255)
-#endif
-
-#if	(defined _XOPEN_SOURCE)
-/* ./src/stdio/P_tmpdir.c */
-#define P_tmpdir                                                          "/tmp"
-#endif
-
-/* ./src/stdio/FILE.c */
 #ifndef __TYPE_FILE_DEFINED__
 #define __TYPE_FILE_DEFINED__
 typedef struct __FILE                                                      FILE;
 #endif
 
-/* ./src/stdio/fpos_t.c */
 #ifndef __TYPE_fpos_t_DEFINED__
 #define __TYPE_fpos_t_DEFINED__
 typedef struct __fpos_t *                                                fpos_t;
 #endif
 
-/* src/stdarg/va_list.c */
 #ifndef __TYPE_va_list_DEFINED__
 #define __TYPE_va_list_DEFINED__
 typedef __builtin_va_list                                               va_list;
 #endif
 
-/* src/stddef/size_t.c */
 #ifndef __TYPE_size_t_DEFINED__
 #define __TYPE_size_t_DEFINED__
 #ifdef __LLP64__
@@ -142,158 +79,185 @@ typedef unsigned long int                                                size_t;
 #endif
 
 
-/* ./src/stdio/__stderr.c */
 extern FILE *__stderr;
-/* ./src/stdio/__stdin.c */
 extern FILE *__stdin;
-/* ./src/stdio/__stdout.c */
 extern FILE *__stdout;
 
-#if	(defined _XOPEN_SOURCE)
-/* src/unistd/optarg.c */
-extern char * optarg;
-/* src/unistd/opterr.c */
-extern int opterr;
-/* src/unistd/optind.c */
-extern int optind;
-/* src/unistd/optopt.c */
-extern int optopt;
-#endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-/* ./src/stdio/clearerr.c */
 void clearerr(FILE * __stream);
-/* ./src/stdio/fclose.c */
+#define clearerr(__s) \
+	__checked(__FILE__, __func__, __LINE__, clearerr, __s)
+
 int fclose(FILE *__stream);
-/* ./src/stdio/feof.c */
+#define fclose(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, fclose, __s)
+
 int feof(FILE *__stream);
-/* ./src/stdio/ferror.c */
+#define feof(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, feof, __s)
+
 int ferror(FILE *__stream);
-/* ./src/stdio/fflush.c */
+#define ferror(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, ferror, __s)
+
 int fflush(FILE *__stream);
-/* ./src/stdio/fgetc.c */
+#define fflush(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, fflush, __s)
+
 int fgetc(FILE *__stream);
-/* ./src/stdio/fgetpos.c */
+#define fgetc(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, fgetc, __s)
+
 int fgetpos(FILE * restrict __stream, fpos_t * restrict __pos);
-/* ./src/stdio/fgets.c */
+#define fgetpos(__s, __p) \
+	__checked_i(__FILE__, __func__, __LINE__, fgetpos, __s, __p)
+
 char * fgets(char * restrict __s, int __n, FILE * restrict __stream);
-/* ./src/stdio/fopen.c */
+#define fgets(__s, __n, __f) \
+	(char*)__checked_p(__FILE__, __func__, __LINE__, fgets, __s, __n, __f)
+
 FILE * fopen(const char * restrict __filename, const char * restrict __mode);
-/* ./src/stdio/fprintf.c */
+#define fopen(__n, __m) \
+	(FILE*)__checked_p(__FILE__, __func__, __LINE__, fopen, __n, __m)
+
 int fprintf(FILE * restrict __stream, const char * restrict __format, ...);
-/* ./src/stdio/fputc.c */
+/* TODO */
+
 int fputc(int __c, FILE *__stream);
-/* ./src/stdio/fputs.c */
+#define fputc(__c, __f) \
+	__checked_i(__FILE__, __func__, __LINE__, fputc, __c, __f)
+
 int fputs(const char * restrict __s, FILE * restrict __stream);
-/* ./src/stdio/fread.c */
+#define fputs(__s, __f) \
+	__checked_i(__FILE__, __func__, __LINE__, fputs, __s, __f)
+
 size_t fread(void * restrict __ptr, size_t __size, size_t __nmemb, FILE * restrict __stream);
-/* ./src/stdio/freopen.c */
+#define fread(__p, __s, __n, __f) \
+	__checked_s(__FILE__, __func__, __LINE__, fread, __p, __s, __n, __f)
+
 FILE * freopen(const char * restrict __filename, const char * restrict __mode, FILE * restrict __stream);
-/* ./src/stdio/fscanf.c */
+#define freopen(__n, __m, __f) \
+	__checked_p(__FILE__, __func__, __LINE__, freopen, __n, __m, __f)
+
 int fscanf(FILE * restrict __stream, const char * restrict __format, ...);
-/* ./src/stdio/fseek.c */
+/* TODO */
+
 int fseek(FILE *__stream, long int __offset, int __whence);
-/* ./src/stdio/fsetpos.c */
+#define fseek(__s, __o, __w) \
+	__checked_i(__FILE__, __func__, __LINE__, fseek, __s, __o, __w)
+
 int fsetpos(FILE *__stream, const fpos_t *__pos);
-/* ./src/stdio/ftell.c */
+#define fsetpos(__s, __p) \
+	__checked_i(__FILE__, __func__, __LINE__, fsetpos, __s, __p)
+
 long int ftell(FILE *__stream);
-/* ./src/stdio/fwrite.c */
+#define ftell(__s) \
+	__checked_l(__FILE__, __func__, __LINE__, ftell, __s)
+
 size_t fwrite(const void * restrict __ptr, size_t __size, size_t __nmemb, FILE * restrict __stream);
-/* ./src/stdio/getc.c */
+#define fwrite(__p, __s, __n, __f) \
+	__checked_s(__FILE__, __func__, __LINE__, fwrite, __p, __s, __n, __f)
+
 int getc(FILE *__stream);
-/* ./src/stdio/getchar.c */
+#define getc(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, getc, __s)
+
 int getchar(void);
-/* ./src/stdio/perror.c */
+#define getchar() \
+	__checked_i(__FILE__, __func__, __LINE__, getchar)
+
 void perror(const char *__s);
-/* ./src/stdio/printf.c */
+#define perror(__s) \
+	__checked(__FILE__, __func__, __LINE__, perror, __s)
+
 int printf(const char *__format, ...);
-/* ./src/stdio/putc.c */
+/* TODO */
+
 int putc(int __c, FILE *__stream);
-/* ./src/stdio/putchar.c */
+#define putc(__c, __s) \
+	__checked_i(__FILE__, __func__, __LINE__, putc, __c, __s)
+
 int putchar(int __c);
-/* ./src/stdio/puts.c */
+#define putchar(__c) \
+	__checked_i(__FILE__, __func__, __LINE__, putchar, __c)
+
 int puts(const char *__s);
-/* ./src/stdio/remove.c */
+#define puts(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, puts, __s)
+
 int remove(const char *__filename);
-/* ./src/stdio/rename.c */
+#define remove(__n) \
+	__checked_i(__FILE__, __func__, __LINE__, remove, __n)
+
 int rename(const char *__old, const char *__new);
-/* ./src/stdio/rewind.c */
+#define rename(__o, __n) \
+	__checked_i(__FILE__, __func__, __LINE__, rename, __o, __n)
+
 void rewind(FILE *__stream);
-/* ./src/stdio/scanf.c */
+#define clearerr(__s) \
+	__checked(__FILE__, __func__, __LINE__, clearerr, __s)
+
 int scanf(const char * restrict __format, ...);
-/* ./src/stdio/setbuf.c */
+/* TODO */
+
 void setbuf(FILE * restrict __stream, char * restrict __buf);
-/* ./src/stdio/setvbuf.c */
+#define setbuf(__s, __b) \
+	__checked(__FILE__, __func__, __LINE__, setbuf, __s, __b)
+
 int setvbuf(FILE *__stream, char *__buf, int __mode, size_t __size);
-/* ./src/stdio/sprintf.c */
+#define setvbuf(__f, __b, __m, __s) \
+	__checked_i(__FILE__, __func__, __LINE__, setvbuf, __f, __b, __m, __s)
+
 int sprintf(char * restrict __s, const char * restrict __format, ...);
-/* ./src/stdio/sscanf.c */
+/* TODO */
+
 int sscanf(const char * restrict __s, const char * restrict __format, ...);
-/* ./src/stdio/tmpfile.c */
+/* TODO */
+
 FILE * tmpfile(void);
-/* ./src/stdio/tmpnam.c */
+#define tmpfile() \
+	__checked_p(__FILE__, __func__, __LINE__, tmpfile)
+
 char * tmpnam(char *__s);
-/* ./src/stdio/ungetc.c */
+#define tmpnam(__s) \
+	__checked_p(__FILE__, __func__, __LINE__, tmpnam, __s)
+
 int ungetc(int __c, FILE *__stream);
-/* ./src/stdio/vfprintf.c */
+#define fputc(__c, __f) \
+	__checked_i(__FILE__, __func__, __LINE__, fputc, __c, __f)
+
 int vfprintf(FILE * restrict __stream, const char * restrict __format, va_list __arg);
-/* ./src/stdio/vprintf.c */
+/* TODO */
+
 int vprintf(const char * restrict __format, va_list __arg);
-/* ./src/stdio/vsprintf.c */
+/* TODO */
+
 int vsprintf(char *__s, const char *__format, va_list __arg);
+/* TODO */
+
 
 #if	(!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
-/* ./src/stdio/gets.c */
 char * gets(char *__s);
+#define gets(__s) \
+	__checked_p(__FILE__, __func__, __LINE__, gets, __s)
+
 #endif
 
 #if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-/* ./src/stdio/snprintf.c */
 int snprintf(char * restrict __s, size_t __n, const char * restrict __format, ...);
-/* ./src/stdio/vfscanf.c */
+/* TODO */
+
 int vfscanf(FILE * restrict __stream, const char * restrict __format, va_list __arg);
-/* ./src/stdio/vscanf.c */
+/* TODO */
+
 int vscanf(const char * restrict __format, va_list __arg);
-/* ./src/stdio/vsnprintf.c */
+/* TODO */
+
 int vsnprintf(char * restrict __s, size_t __n, const char *__format, va_list __arg);
-/* ./src/stdio/vsscanf.c */
+/* TODO */
+
 int vsscanf(const char * restrict __s, const char * restrict __format, va_list __arg);
-#endif
+/* TODO */
 
-#if	(defined _POSIX_SOURCE)
-/* ./src/stdio/fdopen.c */
-FILE * fdopen(int __fildes, const char * __mode);
-/* ./src/stdio/fileno.c */
-int fileno(FILE * __stream);
-/* src/unistd/ctermid.c */
-char * ctermid(char * __s);
 #endif
-
-#if	(defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
-/* ./src/stdio/pclose.c */
-int pclose(FILE * __stream);
-/* ./src/stdio/popen.c */
-FILE * popen(const char * __command, const char * __mode);
-#endif
-
-#if	(defined _XOPEN_SOURCE)
-/* ./src/stdio/tempnam.c */
-char * tempnam(const char * __dir, const char * __pfx);
-/* src/unistd/getopt.c */
-int getopt(int __argc, char * const argv[], const char *__optstring);
-#endif
-
-#if	(defined _XOPEN_SOURCE && _XOPEN_SOURCE < 600)
-/* ./src/stdio/getw.c */
-int getw(FILE *__stream);
-/* ./src/stdio/putw.c */
-int putw(int __w, FILE *__stream);
-/* src/unistd/cuserid.c */
-char *cuserid(char *__s);
-#endif
-
 
 #endif
