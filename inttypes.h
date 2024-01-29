@@ -31,10 +31,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 /* TODO: replace WORD_BIT with __LP32__, __ILP32__, __ILP64__, __LLP64__ */
 
 #if (199901L <= __STDC_VERSION_INTTYPES_H__)
 #include <stdint.h>
+#include <wchar.h>
 
 #define PRIX16                                                              "hX"
 #define PRIX32                                                              "lX"
@@ -288,6 +291,23 @@ uintmax_t strtoumax(const char *restrict, char ** restrict, int);
 intmax_t wcstoimax(const wchar_t * restrict, wchar_t ** restrict, int);
 uintmax_t wcstoumax(const wchar_t * restrict, wchar_t ** restrict, int);
 #endif
+
+intmax_t __checked_im(const char *, const char *, unsigned long long, intmax_t(*)(), ...);
+uintmax_t __checked_uim(const char *, const char *, unsigned long long, uintmax_t(*)(), ...);
+imaxdiv_t __checked_imd(const char *, const char *, unsigned long long, imaxdiv_t(*)(), ...);
+
+#define imaxabs(__i) \
+	__checked_im(__FILE__, __func__, __line__, imaxabs, __i)
+#define imaxdiv(__n, __d) \
+	__checked_imd(__FILE__, __func__, __line__, imaxdiv, __n, __d)
+#define strtoimax(__s, __e, __b) \
+	__checked_im(__FILE__, __func__, __line__, strtoimax, __s, __e, __b)
+#define strtoumax(__s, __e, __b) \
+	__checked_uim(__FILE__, __func__, __line__, strtoumax, __s, __e, __b)
+#define wcstoimax(__s, __e, __b) \
+	__checked_im(__FILE__, __func__, __line__, wcstoimax, __s, __e, __b)
+#define wcstoumax(__s, __e, __b) \
+	__checked_uim(__FILE__, __func__, __line__, wcstoumax, __s, __e, __b)
 
 #if (defined _XOPEN_SOURCE && 500 <= _XOPEN_SOURCE && _XOPEN_SOURCE < 600)
 /* TODO: {u,}int{8,16,32,64}_t, {u,}intptr_t */
