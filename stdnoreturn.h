@@ -31,6 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #if (__STDC_VERSION_STDNORETURN_H__ < 201112L)
 # error <stdnoreturn.h> requires C11 or higher
 #endif
