@@ -31,65 +31,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
+#include <__ung.h>
 
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
-
-/* ./src/time/CLOCKS_PER_SEC.c */
 #define CLOCKS_PER_SEC                                        ((clock_t)1000000)
-/* src/stddef/NULL.c */
 #define NULL                                                          ((void*)0)
 
-#if	(defined _POSIX_SOURCE)
-/* ./src/time/CLK_TCK.c */
-#define CLK_TCK                                                       /* TODO */
-#endif
-
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
-/* ./src/time/CLOCK_REALTIME.c */
-#define CLOCK_REALTIME                                                       (3)
-/* ./src/time/TIMER_ABSTIME.c */
-#define TIMER_ABSTIME                                                        (0)
-#endif
-
-/* ./src/time/clock_t.c */
 #ifndef __TYPE_clock_t_DEFINED__
 #define __TYPE_clock_t_DEFINED__
 typedef long int                                                        clock_t;
 #endif
 
-/* ./src/time/time_t.c */
 #ifndef __TYPE_time_t_DEFINED__
 #define __TYPE_time_t_DEFINED__
 typedef long int                                                         time_t;
 #endif
 
-/* src/stddef/size_t.c */
 #ifndef __TYPE_size_t_DEFINED__
 #define __TYPE_size_t_DEFINED__
 #ifdef __LLP64__
@@ -104,7 +60,6 @@ typedef unsigned long int                                                size_t;
 #endif
 
 
-/* ./src/time/struct_tm.c */
 #ifndef __TYPE_struct_tm_DEFINED__
 #define __TYPE_struct_tm_DEFINED__
 struct tm {
@@ -120,102 +75,40 @@ struct tm {
 };
 #endif
 
-
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE) || (201112 <= __STDC_VERSION__)
-/* ./src/time/struct_timespec.c */
-#ifndef __TYPE_struct_timespec_DEFINED__
-#define __TYPE_struct_timespec_DEFINED__
-struct timespec {
-	time_t tv_sec;	/* Seconds */
-	long tv_nsec;	/* Nanoseonds */
-};
-#endif
-
-/* ./src/time/struct_itimerspec.c */
-#ifndef __TYPE_struct_itimerspec_DEFINED__
-#define __TYPE_struct_itimerspec_DEFINED__
-struct itimerspec {
-	struct timespec it_interval;
-	struct timespec it_value;
-};
-#endif
-#endif
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/time/tzname.c */
-extern char * tzname[2];
-#endif
-
-#if	(defined _XOPEN_SOURCE)
-/* ./src/time/daylight.c */
-extern int daylight;
-/* ./src/time/timezone.c */
-extern long timezone;
-#endif
-
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/time/getdate_err.c */
-extern int getdate_err;
-#endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-/* ./src/time/asctime.c */
 char * asctime(const struct tm * __timeptr);
-/* ./src/time/clock.c */
+#define asctime(__timeptr) \
+	__checked_p(__FILE__, __func__, __LINE__, asctime, __timeptr)
+
 clock_t clock(void);
-/* ./src/time/ctime.c */
+#define clock() \
+	__checked_clock(__FILE__, __func__, __LINE__, clock)
+
 char * ctime(const time_t * __timer);
-/* ./src/time/difftime.c */
+#define ctime(__timer) \
+	__checked_p(__FILE__, __func__, __LINE__, ctime, __timer)
+
 double difftime(time_t __time1, time_t __time0);
-/* ./src/time/gmtime.c */
+#define difftime(__time1, __time0) \
+	__checked_d(__FILE__, __func__, __LINE__, difftime, __time1, __time2)
+
 struct tm * gmtime(const time_t * __timer);
-/* ./src/time/localtime.c */
+#define gmtime(__timer) \
+	__checked_p(__FILE__, __func__, __LINE__, gmtime, __timer)
+
 struct tm * localtime(const time_t * __timer);
-/* ./src/time/mktime.c */
+#define localtime(__timer) \
+	__checked_p(__FILE__, __func__, __LINE__, localtime, __timer)
+
 time_t mktime(struct tm * __timeptr);
-/* ./src/time/strftime.c */
+#define mktime(__timeptr) \
+	__checked_time(__FILE__, __func__, __LINE__, mktime, __timeptr)
+
 size_t strftime(char * restrict __s, size_t __maxsize, const char * restrict __format, const struct tm * restrict __timeptr);
-/* ./src/time/time.c */
+#define strftime(__s, __maxsize, __format, __timeptr) \
+	__checked_s(__FILE__, __func__, __LINE__, strftime, __s, __maxsize, __format, __timeptr)
+
 time_t time(time_t * __timer);
-
-#if	(defined _POSIX_SOURCE)
-/* ./src/time/tzset.c */
-void tzset(void);
-#endif
-
-#if	(defined _POSIX_C_SOURCE && 199309 <= _POSIX_C_SOURCE)
-/* ./src/time/clock_getres.c */
-int clock_getres(clockid_t __clock_id, struct timespec *__res);
-/* ./src/time/clock_gettime.c */
-int clock_gettime(clockid_t __clock_id, struct timespec *__tp);
-/* ./src/time/clock_settime.c */
-int clock_settime(clockid_t __clock_id, const struct timespec *__tp);
-/* ./src/time/nanosleep.c */
-int nanosleep(const struct timespec *__rqtp, struct timespec *__rmtp);
-/* ./src/time/timer_create.c */
-int timer_create(clockid_t __clockid, struct sigevent *restrict __evp, timer_t *restrict __timerid);
-/* ./src/time/timer_delete.c */
-int timer_delete(timer_t __timerid);
-/* ./src/time/timer_getoverrun.c */
-int timer_getoverrun(timer_t __timerid);
-/* ./src/time/timer_gettime.c */
-int timer_gettime(timer_t __timerid, struct itimerspec *__value);
-/* ./src/time/timer_settime.c */
-int timer_settime(timer_t __timerid, int __flags, const struct itimerspec * restrict __value, struct itimerspec * restrict __ovalue);
-#endif
-
-#if	(defined _XOPEN_SOURCE)
-/* ./src/time/strptime.c */
-char *strptime(const char *restrict __buf, const char *restrict __format, struct tm *restrict __tm);
-#endif
-
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/time/getdate.c */
-struct tm *getdate(const char *__string);
-#endif
-
+#define time(__timer) \
+	__checked_time(__FILE__, __func__, __LINE__, time, __timer)
 
 #endif
