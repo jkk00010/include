@@ -154,7 +154,7 @@ size_t mbstowcs(wchar_t * restrict __pwcs, const char * restrict __s, size_t __n
 
 int mbtowc(wchar_t * restrict __pwc, const char * restrict __s, size_t __n);
 #define mbtowc(__pwc, __s, __n) \
-	__checked_i(__FILE__, __func__, __LINE__, mbtowc, __pwd, __s, __n)
+	__checked_i(__FILE__, __func__, __LINE__, mbtowc, __pwc, __s, __n)
 
 void qsort(void * __base, size_t __nmemb, size_t __size, int (*__compar)(const void *, const void *));
 #define qsort(__b, __n, __s, __c) \
@@ -230,6 +230,22 @@ unsigned long long int strtoull(const char * restrict __nptr, char ** restrict _
 #define strtoull(__s, __e, __b) \
 	__checked_ull(__FILE__, __func__, __LINE__, strtoull, __s, __e, __b)
 
+#endif
+
+#ifdef __STDC_WANT_LIB_EXT1__
+typedef int errno_t;
+typedef size_t rsize_t;
+typedef void (*constraint_handler_t)(const char * restrict, void * restrict, errno_t);
+
+constraint_handler_t set_constraint_handler_s(constraint_handler_t handler);
+void abort_handler_s(const char * restrict msg, void * restrict ptr, errno_t error);
+void ignore_handler_s(const char * restrict msg, void * restrict ptr, errno_t error);
+errno_t getenv_s(size_t * restrict len, char * restrict value, rsize_t maxsize, const char * restrict name);
+void *bsearch_s(const void *key, const void *base, rsize_t nmemb, rsize_t size, int (*compar)(const void *k, const void *y, void *context), void *context);
+errno_t qsort_s(void *base, rsize_t nmemb, rsize_t size, int (*compar)(const void *x, const void *y, void *context), void *context);
+errno_t wctomb_s(int * restrict status, char * restrict s, rsize_t smax, wchar_t wc);
+errno_t mbstowcs_s(size_t * restrict retval, wchar_t * restrict dst, rsize_t dstmax, const char * restrict src, rsize_t len);
+errno_t wcstombs_s(size_t * restrict retval, char * restrict dst, rsize_t dstmax, const wchar_t * restrict src, rsize_t len);
 #endif
 
 #endif
