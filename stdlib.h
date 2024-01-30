@@ -31,66 +31,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined _XOPEN_SOURCE && _XOPEN_SOURCE - 1 < 0
-#undef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 400
-#endif
+#include <__ung.h>
 
-#if defined _XOPEN_SOURCE && !defined _POSIX_C_SOURCE
-#	if (_XOPEN_SOURCE >= 700)
-#		define _POSIX_C_SOURCE 200809L
-#	elif (_XOPEN_SOURCE >= 600)
-#		define _POSIX_C_SOURCE 200112L
-#	elif (_XOPEN_SOURCE >= 500)
-#		define _POSIX_C_SOURCE 199506L
-#	else
-#		define _POSIX_C_SOURCE 2
-#	endif
-#endif
-
-#if defined _POSIX_C_SOURCE && !defined _POSIX_SOURCE
-#	define _POSIX_SOURCE
-#endif
-
-#if !defined __STDC_VERSION__ || __STDC_VERSION__ < 19901L
-#	if (defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 200112L)
-#		error POSIX.1-2001 and later require a C99 compiler
-#	elif (defined _XOPEN_SOURCE && _XOPEN_SOURCE >= 600)
-#		error XOPEN Issue 6 and later require a C99 compiler
-#	endif
-#endif
-
-/* ./src/stdlib/EXIT_FAILURE.c */
 #define EXIT_FAILURE                                                         (1)
-/* ./src/stdlib/EXIT_SUCCESS.c */
 #define EXIT_SUCCESS                                                         (0)
-/* ./src/stdlib/MB_CUR_MAX.c */
 #define MB_CUR_MAX                                                           (4)
-/* ./src/stdlib/RAND_MAX.c */
 #define RAND_MAX                                                         (32767)
-/* src/stddef/NULL.c */
 #define NULL                                                          ((void*)0)
 
-#if	(defined _XOPEN_SOURCE)
-/* src/sys/wait/WEXITSTATUS.c */
-#define WEXITSTATUS(__stat_val)                              (__stat_val & 0xff)
-/* src/sys/wait/WIFEXITED.c */
-#define WIFEXITED(__stat_val)                                (__stat_val <= 255)
-/* src/sys/wait/WIFSIGNALED.c */
-#define WIFSIGNALED(__stat_val)                             (__stat_val & 0x100)
-/* src/sys/wait/WIFSTOPPED.c */
-#define WIFSTOPPED(__stat_val)                              (__stat_val & 0x200)
-/* src/sys/wait/WNOHANG.c */
-#define WNOHANG                                                           (1<<0)
-/* src/sys/wait/WSTOPSIG.c */
-#define WSTOPSIG(__stat_val)                                 (__stat_val & 0xff)
-/* src/sys/wait/WTERMSIG.c */
-#define WTERMSIG(__stat_val)                                 (__stat_val & 0xff)
-/* src/sys/wait/WUNTRACED.c */
-#define WUNTRACED                                                         (1<<1)
-#endif
-
-/* ./src/stdlib/div_t.c */
 #ifndef __TYPE_div_t_DEFINED__
 #define __TYPE_div_t_DEFINED__
 typedef struct {
@@ -99,7 +47,6 @@ typedef struct {
 } div_t;
 #endif
 
-/* ./src/stdlib/ldiv_t.c */
 #ifndef __TYPE_ldiv_t_DEFINED__
 #define __TYPE_ldiv_t_DEFINED__
 typedef struct {
@@ -108,7 +55,6 @@ typedef struct {
 } ldiv_t;
 #endif
 
-/* src/stddef/size_t.c */
 #ifndef __TYPE_size_t_DEFINED__
 #define __TYPE_size_t_DEFINED__
 #ifdef __LLP64__
@@ -122,7 +68,6 @@ typedef unsigned long int                                                size_t;
 #endif
 #endif
 
-/* src/stddef/wchar_t.c */
 #ifndef __TYPE_wchar_t_DEFINED__
 #define __TYPE_wchar_t_DEFINED__
 typedef int                                                             wchar_t;
@@ -130,7 +75,6 @@ typedef int                                                             wchar_t;
 
 
 #if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-/* ./src/stdlib/lldiv_t.c */
 #ifndef __TYPE_lldiv_t_DEFINED__
 #define __TYPE_lldiv_t_DEFINED__
 typedef struct {
@@ -138,166 +82,154 @@ typedef struct {
 	long long int rem;
 } lldiv_t;
 #endif
-
 #endif
 
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
-#define restrict
-#endif
-
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 200112L)
-#define _Noreturn
-#endif
-
-/* ./src/stdlib/abort.c */
 _Noreturn void abort(void);
-/* ./src/stdlib/abs.c */
+#define abort() \
+	__checked(__FILE__, __func__, __LINE__, abort)
+
 int abs(int __j);
-/* ./src/stdlib/atexit.c */
+#define abs(__j) \
+	__checked_i(__FILE__, __func__, __LINE__, abs, __j)
+
 int atexit(void (*__func)(void));
-/* ./src/stdlib/atof.c */
+#define atexit(__func) \
+	__checked_i(__FILE__, __func__, __LINE__, atext, __func)
+
 double atof(const char * __nptr);
-/* ./src/stdlib/atoi.c */
+#define atof(__s) \
+	__checked_d(__FILE__, __func__, __LINE__, atof, __s)
+
 int atoi(const char * __nptr);
-/* ./src/stdlib/atol.c */
+#define atoi(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, atoi, __s)
+
 long int atol(const char * __nptr);
-/* ./src/stdlib/bsearch.c */
+#define atol(__s) \
+	__checked_l(__FILE__, __func__, __LINE__, atol, __s)
+
 void * bsearch(const void * __key, const void * __base, size_t __nmemb, size_t __size, int (*__compar)(const void *, const void*));
-/* ./src/stdlib/calloc.c */
+#define bsearch(__k, __b, __n, __s, __c) \
+	__checked_p(__FILE__, __func__, __LINE__, bsearch, __k, __b, __n, __s, __c)
+
 void * calloc(size_t __nmemb, size_t __size);
-/* ./src/stdlib/div.c */
+#define calloc(__n, __s) \
+	__checked_p(__FILE__, __func__, __LINE__, calloc, __n, __s)
+
 div_t div(int __numer, int __denom);
-/* ./src/stdlib/exit.c */
+#define div(__n, __d) \
+	__checked_div(__FILE__, __func__, __LINE__, __n, __d)
+
 _Noreturn void exit(int __status);
-/* ./src/stdlib/free.c */
+#define exit(__s) \
+	__checked(__FILE__, __func__, __LINE__, exit, __s)
+
 void free(void * __ptr);
-/* ./src/stdlib/getenv.c */
+#define free(__p) \
+	__checked(__FILE__, __func__, __LINE__, free, __p)
+
 char * getenv(const char * __name);
-/* ./src/stdlib/labs.c */
+#define getenv(__n) \
+	__checked_p(__FILE__, __func__, __LINE__, getenv, __n)
+
 long int labs(long int __j);
-/* ./src/stdlib/ldiv.c */
+#define labs(__j) \
+	__checked_l(__FILE__, __func__, __LINE__, labs, __j)
+
 ldiv_t ldiv(long int __numer, long int __denom);
-/* ./src/stdlib/malloc.c */
+#define ldiv(__n, __d) \
+	__checked_ldiv(__FILE__, __func__, __LINE__, ldiv, __n, __d)
+
 void * malloc(size_t __size);
-/* ./src/stdlib/mblen.c */
+#define malloc(__s) \
+	__checked_p(__FILE__, __func__, __LINE__, malloc, __s)
+
 int mblen(const char * __s, size_t __n);
-/* ./src/stdlib/mbstowcs.c */
+#define mblen(__s, __n) \
+	__checked_i(__FILE__, __func__, __LINE__, mblen, __s, __n)
+
 size_t mbstowcs(wchar_t * restrict __pwcs, const char * restrict __s, size_t __n);
-/* ./src/stdlib/mbtowc.c */
+#define mbstowcs(__pwcs, __s, __n) \
+	__checked_s(__FILE__, __func__, __LINE__, mbstowcs, __pwcs, __s, __n)
+
 int mbtowc(wchar_t * restrict __pwc, const char * restrict __s, size_t __n);
-/* ./src/stdlib/qsort.c */
+#define mbtowc(__pwc, __s, __n) \
+	__checked_i(__FILE__, __func__, __LINE__, mbtowc, __pwd, __s, __n)
+
 void qsort(void * __base, size_t __nmemb, size_t __size, int (*__compar)(const void *, const void *));
-/* ./src/stdlib/rand.c */
+#define qsort(__b, __n, __s, __c) \
+	__checked(__FILE__, __func__, __LINE__, qsort, __b, __n, __s, __c)
+
 int rand(void);
-/* ./src/stdlib/realloc.c */
+#define rand() \
+	__checked_i(__FILE__, __func__, __LINE__, rand)
+
 void * realloc(void * __ptr, size_t __size);
-/* ./src/stdlib/srand.c */
+#define realloc(__p, __s) \
+	__checked_p(__FILE__, __func__, __LINE__, realloc, __p, __s)
+
 void srand(unsigned int __seed);
-/* ./src/stdlib/strtod.c */
+#define srand(__s) \
+	__checked(__FILE__, __func__, __LINE__, srand, __s)
+
 double strtod(const char * restrict __nptr, char ** restrict __endptr);
-/* ./src/stdlib/strtol.c */
+#define strtod(__s, __e) \
+	__checked_d(__FILE__, __func__, __LINE__, strtod, __s, __e)
+
 long int strtol(const char * restrict __nptr, char ** restrict __endptr, int __base);
-/* ./src/stdlib/strtoul.c */
+#define strtol(__s, __e, __b) \
+	__checked_l(__FILE__, __func__, __LINE__, strtol, __s, __e, __b)
+
 unsigned long int strtoul(const char * __nptr, char ** __endptr, int __base);
-/* ./src/stdlib/system.c */
+#define strtoul(__s, __e, __b) \
+	__checked_ul(__FILE__, __func__, __LINE__, strtoul, __s, __e, __b)
+
 int system(const char * __string);
-/* ./src/stdlib/wcstombs.c */
+#define system(__s) \
+	__checked_i(__FILE__, __func__, __LINE__, system, __s)
+
 size_t wcstombs(char * restrict __s, const wchar_t * restrict __pwcs, size_t __n);
-/* ./src/stdlib/wctomb.c */
+#define wcstombs(__s, __pwcs, __n) \
+	__checked_s(__FILE__, __func__, __LINE__, wcstombs, __s, __pwcs, __n)
+
 int wctomb(char * __s, wchar_t __wchar);
+#define wctomb(__s, __w) \
+	__checked_i(__FILE__, __func__, __LINE__, wctomb, __s, __w)
+
 
 #if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-/* ./src/stdlib/_Exit.c */
 _Noreturn void _Exit(int __status);
-/* ./src/stdlib/atoll.c */
+#define _Exit(__s) \
+	__checked(__FILE__, __func__, __LINE__, _Exit, __s)
+
 long long int atoll(const char *__nptr);
-/* ./src/stdlib/llabs.c */
+#define atoll(__s) \
+	__checked_ll(__FILE__, __func__, __LINE__, atoll, __s)
+
 long long int llabs(long long int __j);
-/* ./src/stdlib/lldiv.c */
+#define llabs(__j) \
+	__checked_ll(__FILE__, __func__, __LINE__, llabs, __j)
+
 lldiv_t lldiv(long long int __numer, long long int __denom);
-/* ./src/stdlib/strtof.c */
+#define lldiv(__n, __d) \
+	__checked_lldiv(__FILE__, __func__, __LINE__, lldiv, __n, __d)
+
 float strtof(const char * restrict __nptr, char ** restrict __endptr);
-/* ./src/stdlib/strtold.c */
+#define strtof(__s, __e) \
+	__checked_f(__FILE__, __func__, __LINE__, strtof, __s, __e)
+
 long double strtold(const char * restrict __nptr, char ** restrict __endptr);
-/* ./src/stdlib/strtoll.c */
+#define strtold(__s, __e) \
+	__checked_ld(__FILE__, __func__, __LINE__, strtold, __s, __e)
+
 long long int strtoll(const char * restrict __nptr, char ** restrict __endptr, int __base);
-/* ./src/stdlib/strtoull.c */
+#define strtoll(__s, __e, __b) \
+	__checked_ll(__FILE__, __func__, __LINE__, strtoll, __s, __e, __b)
+
 unsigned long long int strtoull(const char * restrict __nptr, char ** restrict __endptr, int __base);
-#endif
+#define strtoull(__s, __e, __b) \
+	__checked_ull(__FILE__, __func__, __LINE__, strtoull, __s, __e, __b)
 
-#if	(defined _POSIX_C_SOURCE && 200809 <= _POSIX_C_SOURCE) || \
-	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/stdlib/getsubopt.c */
-int getsubopt(char ** __optionp, char * const * __keylistp, char ** __valuep);
-/* ./src/stdlib/mkstemp.c */
-int mkstemp(char * __template);
 #endif
-
-#if	(defined _XOPEN_SOURCE)
-/* ./src/stdlib/drand48.c */
-double drand48(void);
-/* ./src/stdlib/erand48.c */
-double erand48(unsigned short xsubi[3]);
-/* ./src/stdlib/jrand48.c */
-long jrand48(unsigned short xsub[3]);
-/* ./src/stdlib/lcong48.c */
-void lcong48(unsigned short param[7]);
-/* ./src/stdlib/lrand48.c */
-long lrand48(void);
-/* ./src/stdlib/mrand48.c */
-long mrand48(void);
-/* ./src/stdlib/nrand48.c */
-long nrand48(unsigned short xsubi[3]);
-/* ./src/stdlib/putenv.c */
-int putenv(char * __string);
-/* ./src/stdlib/seed48.c */
-unsigned short * seed48(unsigned short seed16v[3]);
-/* ./src/stdlib/setkey.c */
-void setkey(const char * __key);
-/* ./src/stdlib/srand48.c */
-void srand48(long __seedval);
-#endif
-
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE))
-/* ./src/stdlib/a64l.c */
-long a64l(const char *__s);
-/* ./src/stdlib/grantpt.c */
-int grantpt(int __fildes);
-/* ./src/stdlib/initstate.c */
-char * initstate(unsigned __seed, char * __state, size_t __size);
-/* ./src/stdlib/l64a.c */
-char * l64a(long __value);
-/* ./src/stdlib/ptsname.c */
-char * ptsname(int __fildes);
-/* ./src/stdlib/random.c */
-long random(void);
-/* ./src/stdlib/realpath.c */
-char * realpath(const char * restrict __file_name, char * restrict __resolved_name);
-/* ./src/stdlib/setstate.c */
-char * setstate(char * __state);
-/* ./src/stdlib/srandom.c */
-void srandom(unsigned __seed);
-/* ./src/stdlib/unlockpt.c */
-int unlockpt(int __fildes);
-#endif
-
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE) && _XOPEN_SOURCE < 600)
-/* ./src/stdlib/ttyslot.c */
-int ttyslot(void);
-/* ./src/stdlib/valloc.c */
-void *valloc(size_t __size);
-#endif
-
-#if	(defined _XOPEN_SOURCE && ((defined _XOPEN_SOURCE_EXTENDED && _XOPEN_SOURCE_EXTENDED == 1) || 500 <= _XOPEN_SOURCE) && _XOPEN_SOURCE < 700)
-/* ./src/stdlib/ecvt.c */
-char *ecvt(double __value, int __ndigit, int *__decpt, int *__sign);
-/* ./src/stdlib/fcvt.c */
-char *fcvt(double __value, int __ndigit, int *__decpt, int *__sign);
-/* ./src/stdlib/gcvt.c */
-char *gcvt(double __value, int __ndigit, char *__buf);
-/* ./src/stdlib/mktemp.c */
-char *mktemp(char *__template);
-#endif
-
 
 #endif
