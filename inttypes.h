@@ -297,17 +297,17 @@ uintmax_t __checked_uim(const char *, const char *, unsigned long long, uintmax_
 imaxdiv_t __checked_imd(const char *, const char *, unsigned long long, imaxdiv_t(*)(), ...);
 
 #define imaxabs(__i) \
-	__checked_im(__FILE__, __func__, __line__, imaxabs, __i)
+	__checked_im(__FILE__, __func__, __LINE__, imaxabs, __i)
 #define imaxdiv(__n, __d) \
-	__checked_imd(__FILE__, __func__, __line__, imaxdiv, __n, __d)
+	__checked_imd(__FILE__, __func__, __LINE__, imaxdiv, __n, __d)
 #define strtoimax(__s, __e, __b) \
-	__checked_im(__FILE__, __func__, __line__, strtoimax, __s, __e, __b)
+	__checked_im(__FILE__, __func__, __LINE__, strtoimax, __s, __e, __b)
 #define strtoumax(__s, __e, __b) \
-	__checked_uim(__FILE__, __func__, __line__, strtoumax, __s, __e, __b)
+	__checked_uim(__FILE__, __func__, __LINE__, strtoumax, __s, __e, __b)
 #define wcstoimax(__s, __e, __b) \
-	__checked_im(__FILE__, __func__, __line__, wcstoimax, __s, __e, __b)
+	__checked_im(__FILE__, __func__, __LINE__, wcstoimax, __s, __e, __b)
 #define wcstoumax(__s, __e, __b) \
-	__checked_uim(__FILE__, __func__, __line__, wcstoumax, __s, __e, __b)
+	__checked_uim(__FILE__, __func__, __LINE__, wcstoumax, __s, __e, __b)
 
 #if (defined _XOPEN_SOURCE && 500 <= _XOPEN_SOURCE && _XOPEN_SOURCE < 600)
 /* TODO: {u,}int{8,16,32,64}_t, {u,}intptr_t */
