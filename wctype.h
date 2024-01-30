@@ -31,25 +31,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <__ung.h>
+
 #if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
-/* ./src/wctype/WEOF.c */
 #define WEOF                                                      ((wint_t)(-1))
 #endif
 
 #if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
-/* ./src/wctype/wctrans_t.c */
 #ifndef __TYPE_wctrans_t_DEFINED__
 #define __TYPE_wctrans_t_DEFINED__
 typedef int                                                           wctrans_t;
 #endif
 
-/* ./src/wctype/wctype_t.c */
 #ifndef __TYPE_wctype_t_DEFINED__
 #define __TYPE_wctype_t_DEFINED__
 typedef int                                                            wctype_t;
 #endif
 
-/* ./src/wctype/wint_t.c */
 #ifndef __TYPE_wint_t_DEFINED__
 #define __TYPE_wint_t_DEFINED__
 typedef int                                                              wint_t;
@@ -58,46 +56,45 @@ typedef int                                                              wint_t;
 #endif
 
 #if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
-/* ./src/wctype/iswalnum.c */
 int iswalnum(wint_t __wc);
-/* ./src/wctype/iswalpha.c */
+#define iswalnum(__wc) __checked_i(__FILE__, __func__, __LINE__, iswalnum, __wc)
 int iswalpha(wint_t __wc);
-/* ./src/wctype/iswcntrl.c */
+#define iswalpha(__wc) __checked_i(__FILE__, __func__, __LINE__, iswalpha, __wc)
 int iswcntrl(wint_t __wc);
-/* ./src/wctype/iswctype.c */
+#define iswcntrl(__wc) __checked_i(__FILE__, __func__, __LINE__, iswcntrl, __wc)
 int iswctype(wint_t __wc, wctype_t __desc);
-/* ./src/wctype/iswdigit.c */
+#define iswctype(__wc) __checked_i(__FILE__, __func__, __LINE__, iswctype, __wc)
 int iswdigit(wint_t __wc);
-/* ./src/wctype/iswgraph.c */
+#define iswdigit(__wc) __checked_i(__FILE__, __func__, __LINE__, iswdigit, __wc)
 int iswgraph(wint_t __wc);
-/* ./src/wctype/iswlower.c */
+#define iswgraph(__wc) __checked_i(__FILE__, __func__, __LINE__, iswgraph, __wc)
 int iswlower(wint_t __wc);
-/* ./src/wctype/iswprint.c */
+#define iswlower(__wc) __checked_i(__FILE__, __func__, __LINE__, iswlower, __wc)
 int iswprint(wint_t __wc);
-/* ./src/wctype/iswpunct.c */
+#define iswprint(__wc) __checked_i(__FILE__, __func__, __LINE__, iswprint, __wc)
 int iswpunct(wint_t __wc);
-/* ./src/wctype/iswspace.c */
+#define iswpunct(__wc) __checked_i(__FILE__, __func__, __LINE__, iswpunct, __wc)
 int iswspace(wint_t __wc);
-/* ./src/wctype/iswupper.c */
+#define iswspace(__wc) __checked_i(__FILE__, __func__, __LINE__, iswspace, __wc)
 int iswupper(wint_t __wc);
-/* ./src/wctype/iswxdigit.c */
+#define iswupper(__wc) __checked_i(__FILE__, __func__, __LINE__, iswupper, __wc)
 int iswxdigit(wint_t __wc);
-/* ./src/wctype/towctrans.c */
+#define iswxdigit(__wc) __checked_i(__FILE__, __func__, __LINE__, iswxdigit, __wc)
 wint_t towctrans(wint_t __wc, wctrans_t __desc);
-/* ./src/wctype/towlower.c */
+#define towctrans(__wc, __desc) __checked_i(__FILE__, __func__, __LINE__, towctrans, __wc, __desc)
 wint_t towlower(wint_t __wc);
-/* ./src/wctype/towupper.c */
+#define towlower(__wc) __checked_i(__FILE__, __func__, __LINE__, towlower, __wc)
 wint_t towupper(wint_t __wc);
-/* ./src/wctype/wctrans.c */
+#define towupper(__wc) __checked_i(__FILE__, __func__, __LINE__, towupper, __wc)
 wctrans_t wctrans(const char * __property);
-/* ./src/wctype/wctype.c */
+#define wctrans(__p) __checked_i(__FILE__, __func__, __LINE__, wctrans, __p)
 wctype_t wctype(const char * __property);
+#define wctype(__p) __checked_i(__FILE__, __func__, __LINE__, wctype, __p)
 #endif
 
 #if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
-/* ./src/wctype/iswblank.c */
 int iswblank(wint_t __wc);
+#define iswblank(__wc) __checked_i(__FILE__, __func__, __LINE__, iswblank, __wc)
 #endif
-
 
 #endif
