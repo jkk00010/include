@@ -33,10 +33,6 @@ SOFTWARE.
 
 #include <__ung.h>
 
-#if (__STDC_VERSION_FENV_H__ < 199901L)
-# error "<fenv.h> requires C99 or higher"
-#endif
-
 #define FE_ALL_EXCEPT (FE_DIVBYZERO|FE_INEXACT|FE_INVALID|FE_OVERFLOW|FE_UNDERFLOW)
 #define FE_DFL_ENV                                               (&__FE_DFL_ENV)
 #define FE_DIVBYZERO                                                      (1<<0)
@@ -76,8 +72,8 @@ int __fegetround(const char *, const char *, unsigned long long);
 #define fegetround() __fegetround(__FILE__, __func__, __LINE__)
 int __feholdexcept(const char *, const char *, unsigned long long, fenv_t *);
 #define feclearexcept(__e) __feclearexcept(__FILE__, __func__, __LINE__, __e)
-int __feraisexcept(const char *, const char *, unsigned long long, int);
-#define feraisexcept(__i) __feraisexcept(__FILE__, __func__, __LINE__, __i)
+int __feraiseexcept(const char *, const char *, unsigned long long, int);
+#define feraiseexcept(__i) __feraiseexcept(__FILE__, __func__, __LINE__, __i)
 int __fesetenv(const char *, const char *, unsigned long long, const fenv_t *);
 #define fesetenv(__e) __fesetenv(__FILE__, __func__, __LINE__, __e)
 int __fesetexceptflag(const char *, const char *, unsigned long long, const fexcept_t *, int);
