@@ -85,9 +85,9 @@ int raise(int);
 void (*signal(int, void (*)(int)))(int);
 
 #ifndef __UNG_INTERNAL__
-int __raise(const char *, const char *, unsigned long long int);
+int __raise(const char *, const char *, unsigned long long int, int);
 #define raise(__i) __raise(__FILE__, __func__, __LINE__, __i)
-void (*__signal(const char *, const char *, unsigned long long int, void (*)(int)))(int);
+void (*__signal(const char *, const char *, unsigned long long int, int, void (*)(int)))(int);
 #define signal(__i, __fn) __signal(__FILE__, __func__, __LINE__, __i, __fn)
 #endif
 
