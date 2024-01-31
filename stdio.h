@@ -162,4 +162,11 @@ int vsscanf_s(const char * restrict s, const char * restrict format, va_list arg
 char *gets_s(char *s, rsize_t n);
 #endif
 
+#ifndef __UNG_INTERNAL__
+FILE * __fopen(const char *, const char *, unsigned long long, const char * restrict __filename, const char * restrict __mode);
+#define fopen(__f, __m) __fopen(__FILE__, __func__, __LINE__, __f, __m)
+FILE * __freopen(const char *, const char *, unsigned long long, const char * restrict __filename, const char * restrict __mode, FILE * restrict __stream);
+#define freopen(__f, __m, __s) __freopen(__FILE__, __func__, __LINE__, __f, __m, __s)
+#endif
+
 #endif
