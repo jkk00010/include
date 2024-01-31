@@ -37,18 +37,15 @@ SOFTWARE.
 
 typedef unsigned long int                                           jmp_buf[32];
 
-#if (defined __STDC__VERSION__ && 201112L <= __STDC_VERSION__)
-_Noreturn
-#endif
-void longjmp(jmp_buf, int);
+_Noreturn void longjmp(jmp_buf, int);
 int setjmp(jmp_buf);
 
-/*
-#define longjmp(__j, __i) \
-	__checked(__FILE__, __func__, __LINE__, longjmp, __j, __i)
-#define setjmp(__j) \
-	__checked_i(__FILE__, __func__, __LINE__, setjmp, __j)
-*/
+#ifndef __UNG_INTERNAL__
+_Noreturn void longjmp(const char *, const char *, unsigned long long, jmp_buf, int);
+#define longjmp(__b, __i) __longjmp(__FILE__, __func__, __LINE__, __b, __i)
+int setjmp(const char *, const char *, unsigned long long, jmp_buf);
+#define setjmp(__b) __setjmp(__FILE__, __func__, __LINE__, __b)
+#endif
 
 #if (defined _POSIX_SOURCE)
 typedef jmp_buf                                                      sigjmp_buf;
