@@ -68,4 +68,10 @@ SOFTWARE.
 #define FLT_EVAL_METHOD                                                     (-1)
 #endif
 
+#if (201112 <= __STDC_VERSION_FLOAT_H__)
+#define DBL_DECIMAL_DIG                                                     (17)
+#define FLT_DECIMAL_DIG                                                      (9)
+#define LDBL_DECIMAL_DIG                                                    (17)
+#endif
+
 #endif
