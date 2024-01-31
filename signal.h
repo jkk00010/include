@@ -84,9 +84,11 @@ typedef volatile int                                               sig_atomic_t;
 int raise(int);
 void (*signal(int, void (*)(int)))(int);
 
-#define raise(__i) \
-	__checked_i(__FILE__, __func__, __LINE__, raise, __i)
-#define signal(__i, __p) \
-	__checked_p(__FILE__, __func__, __LINE__, signal, __i, __p)
+#ifndef __UNG_INTERNAL__
+int __raise(const char *, const char *, unsigned long long int);
+#define raise(__i) __raise(__FILE__, __func__, __LINE__, __i)
+void (*__signal(const char *, const char *, unsigned long long int, void (*)(int)))(int);
+#define signal(__i, __fn) __signal(__FILE__, __func__, __LINE__, __i, __fn)
+#endif
 
 #endif
