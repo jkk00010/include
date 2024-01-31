@@ -34,36 +34,63 @@ SOFTWARE.
 #include <__ung.h>
 
 int isalnum(int);
-int isalpha(int);
-int iscntrl(int);
-int isdigit(int);
-int isgraph(int);
-int islower(int);
-int isprint(int);
-int ispunct(int);
-int isspace(int);
-int isupper(int);
-int isxdigit(int);
-int tolower(int);
-int toupper(int);
+int __isalnum(const char *, const char *, unsigned long long, int);
+#define isalnum(__c) __isalnum(__FILE__, __func__, __LINE__, __c);
 
-#define isalnum(__c) __checked_i(__FILE__, __func__, __LINE__, isalnum, __c)
-#define isalpha(__c) __checked_i(__FILE__, __func__, __LINE__, isalpha, __c)
-#define iscntrl(__c) __checked_i(__FILE__, __func__, __LINE__, iscntrl, __c)
-#define isdigit(__c) __checked_i(__FILE__, __func__, __LINE__, isdigit, __c)
-#define isgraph(__c) __checked_i(__FILE__, __func__, __LINE__, isgraph, __c)
-#define islower(__c) __checked_i(__FILE__, __func__, __LINE__, islower, __c)
-#define isprint(__c) __checked_i(__FILE__, __func__, __LINE__, isprint, __c)
-#define ispunct(__c) __checked_i(__FILE__, __func__, __LINE__, ispunct, __c)
-#define isspace(__c) __checked_i(__FILE__, __func__, __LINE__, isspace, __c)
-#define isupper(__c) __checked_i(__FILE__, __func__, __LINE__, isupper, __c)
-#define isxdigit(__c) __checked_i(__FILE__, __func__, __LINE__, isxdigit, __c)
-#define tolower(__c) __checked_i(__FILE__, __func__, __LINE__, tolower, __c)
-#define toupper(__c) __checked_i(__FILE__, __func__, __LINE__, toupper, __c)
+int isalpha(int);
+int __isalpha(const char *, const char *, unsigned long long, int);
+#define isalpha(__c) __isalpha(__FILE__, __func__, __LINE__, __c);
+
+int iscntrl(int);
+int __iscntrl(const char *, const char *, unsigned long long, int);
+#define iscntrl(__c) __iscntrl(__FILE__, __func__, __LINE__, __c);
+
+int isdigit(int);
+int __isdigit(const char *, const char *, unsigned long long, int);
+#define isdigit(__c) __isdigit(__FILE__, __func__, __LINE__, __c);
+
+int isgraph(int);
+int __isgraph(const char *, const char *, unsigned long long, int);
+#define isgraph(__c) __isgraph(__FILE__, __func__, __LINE__, __c);
+
+int islower(int);
+int __islower(const char *, const char *, unsigned long long, int);
+#define islower(__c) __islower(__FILE__, __func__, __LINE__, __c);
+
+int isprint(int);
+int __isprint(const char *, const char *, unsigned long long, int);
+#define isprint(__c) __isprint(__FILE__, __func__, __LINE__, __c);
+
+int ispunct(int);
+int __ispunct(const char *, const char *, unsigned long long, int);
+#define ispunct(__c) __ispunct(__FILE__, __func__, __LINE__, __c);
+
+int isspace(int);
+int __isspace(const char *, const char *, unsigned long long, int);
+#define isspace(__c) __isspace(__FILE__, __func__, __LINE__, __c);
+
+int isupper(int);
+int __isupper(const char *, const char *, unsigned long long, int);
+#define isupper(__c) __isupper(__FILE__, __func__, __LINE__, __c);
+
+int isxdigit(int);
+int __isxdigit(const char *, const char *, unsigned long long, int);
+#define isxdigit(__c) __isxdigit(__FILE__, __func__, __LINE__, __c);
+
+int tolower(int);
+int __tolower(const char *, const char *, unsigned long long, int);
+#define tolower(__c) __tolower(__FILE__, __func__, __LINE__, __c);
+
+int toupper(int);
+int __toupper(const char *, const char *, unsigned long long, int);
+#define toupper(__c) __toupper(__FILE__, __func__, __LINE__, __c);
+
 
 #if (199901L <= __STDC_VERSION_CTYPE_H__)
 int isblank(int);
-#define isblank(__c) __checked_i(__FILE__, __func__, __LINE__, isblank, __c)
+int __isblank(const char *, const char *, unsigned long long, int);
+#define isblank(__c) __isblank(__FILE__, __func__, __LINE__, __c);
+
 #endif
 
 #endif
