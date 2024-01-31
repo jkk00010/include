@@ -63,30 +63,31 @@ int fesetexceptflag(const fexcept_t *, int);
 int fesetround(int);
 int fetestexcept(int);
 int feupdateenv(const fenv_t *);
-
-#define feclearexcept(__i) \
-	__checked_i(__FILE__, __func__, __LINE__, feclearexcept, __i)
-#define fegetenv(__f) \
-	__checked_i(__FILE__, __func__, __LINE__, fegetenv, __f)
-#define fegetexceptflag(__f, __i) \
-	__checked_i(__FILE__, __func__, __LINE__, fegetexceptflag, __f, __i)
-#define fegetround() \
-	__checked_i(__FILE__, __func__, __LINE__, fegetround)
-#define feholdexcept(__f) \
-	__checked_i(__FILE__, __func__, __LINE__, feholdexcept, __f)
-#define feraiseexcept(__i) \
-	__checked_i(__FILE__, __func__, __LINE__, feraiseexcept, __i)
-#define fesetenv(__f) \
-	__checked_i(__FILE__, __func__, __LINE__, fesetenv, __f)
-#define fesetexceptflag(__f, __i) \
-	__checked_i(__FILE__, __func__, __LINE__, fesetexceptflag, __f, __i)
-#define fesetround(__i) \
-	__checked_i(__FILE__, __func__, __LINE__, fesetround, __i)
-#define fetestexcept(__i) \
-	__checked_i(__FILE__, __func__, __LINE__, fetestexcept, __i)
-#define feupdateenv(__f) \
-	__checked_i(__FILE__, __func__, __LINE__, feupdateenv, __f)
-
 extern const fenv_t __FE_DFL_ENV;
+
+#ifndef __UNG_INTERNAL__
+int __feclearexcept(const char *, const char *, unsigned long long, int);
+#define feclearexcept(__i) __feclearexcept(__FILE__, __func__, __LINE__, __i)
+int __feclearexcept(const char *, const char *, unsigned long long, int);
+#define feclearexcept(__i) __feclearexcept(__FILE__, __func__, __LINE__, __i)
+int __fegetexceptflag(const char *, const char *, unsigned long long, fexcept_t *, int);
+#define fegetexceptflag(__e, __i) __fegetexceptflag(__FILE__, __func__, __LINE__, __e, __i)
+int __fegetround(const char *, const char *, unsigned long long)
+#define fegetround() __fegetround(__FILE__, __func__, __LINE__)
+int __feholdexcept(const char *, const char *, unsigned long long, fenv_t *);
+#define feclearexcept(__e) __feclearexcept(__FILE__, __func__, __LINE__, __e)
+int __feraisexcept(const char *, const char *, unsigned long long, int);
+#define feraisexcept(__i) __feraisexcept(__FILE__, __func__, __LINE__, __i)
+int __fesetenv(const char *, const char *, unsigned long long, const fenv_t *);
+#define fesetenv(__e) __fesetenv(__FILE__, __func__, __LINE__, __e)
+int __fesetexceptflag(const char *, const char *, unsigned long long, const fexcept_t *, int);
+#define fesetexceptflag(__e, __i) __fesetexceptflag(__FILE__, __func__, __LINE__, __e, __i)
+int __fesetround(const char *, const char *, unsigned long long, int);
+#define fesetround(__i) __fesetround(__FILE__, __func__, __LINE__, __i)
+int __fetestexcept(const char *, const char *, unsigned long long, int);
+#define fetestexcept(__i) __fetestexcept(__FILE__, __func__, __LINE__, __i)
+int __feupdateenv(const char *, const char *, unsigned long long, const fenv_t *);
+#define feupdateenv(__e) __feupdateenv(__FILE__, __func__, __LINE__, __e)
+#endif
 
 #endif
