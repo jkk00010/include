@@ -290,24 +290,23 @@ intmax_t strtoimax(const char * restrict, char ** restrict, int);
 uintmax_t strtoumax(const char *restrict, char ** restrict, int);
 intmax_t wcstoimax(const wchar_t * restrict, wchar_t ** restrict, int);
 uintmax_t wcstoumax(const wchar_t * restrict, wchar_t ** restrict, int);
+
+#ifndef __UNG_INTERNAL__
+intmax_t __imaxabs(const char *, const char *, unsigned long long, intmax_t);
+#define imaxabs(__i) __imaxabs(__FILE__, __func__, __LINE__, __i)
+imaxdiv_t __imaxdiv(const char *, const char *, unsigned long long, intmax_t, intmax_t);
+#define imaxdiv(__n, __d) __imaxdiv(__FILE__, __func__, __LINE__, __n, __d)
+intmax_t __strtoimax(const char *, const char *, unsigned long long, const char * restrict, char ** restrict, int);
+#define strtoimax(__s, __e, __b) __strtoimax(__FILE__, __func__, __LINE__, __s, __e, __b)
+uintmax_t __strtoumax(const char *, const char *, unsigned long long, const char *restrict, char ** restrict, int);
+#define strtoumax(__s, __e, __b) __strtoumax(__FILE__, __func__, __LINE__, __s, __e, __b)
+intmax_t __wcstoimax(const char *, const char *, unsigned long long, const wchar_t * restrict, wchar_t ** restrict, int);
+#define wcstoimax(__s, __e, __b) __wcstoimax(__FILE__, __func__, __LINE__, __s, __e, __b)
+uintmax_t __wcstoumax(const char *, const char *, unsigned long long, const wchar_t * restrict, wchar_t ** restrict, int);
+#define wcstoumax(__s, __e, __b) __wcstoumax(__FILE__, __func__, __LINE__, __s, __e, __b
 #endif
 
-intmax_t __checked_im(const char *, const char *, unsigned long long, intmax_t(*)(), ...);
-uintmax_t __checked_uim(const char *, const char *, unsigned long long, uintmax_t(*)(), ...);
-imaxdiv_t __checked_imd(const char *, const char *, unsigned long long, imaxdiv_t(*)(), ...);
-
-#define imaxabs(__i) \
-	__checked_im(__FILE__, __func__, __LINE__, imaxabs, __i)
-#define imaxdiv(__n, __d) \
-	__checked_imd(__FILE__, __func__, __LINE__, imaxdiv, __n, __d)
-#define strtoimax(__s, __e, __b) \
-	__checked_im(__FILE__, __func__, __LINE__, strtoimax, __s, __e, __b)
-#define strtoumax(__s, __e, __b) \
-	__checked_uim(__FILE__, __func__, __LINE__, strtoumax, __s, __e, __b)
-#define wcstoimax(__s, __e, __b) \
-	__checked_im(__FILE__, __func__, __LINE__, wcstoimax, __s, __e, __b)
-#define wcstoumax(__s, __e, __b) \
-	__checked_uim(__FILE__, __func__, __LINE__, wcstoumax, __s, __e, __b)
+#endif
 
 #if (defined _XOPEN_SOURCE && 500 <= _XOPEN_SOURCE && _XOPEN_SOURCE < 600)
 /* TODO: {u,}int{8,16,32,64}_t, {u,}intptr_t */
