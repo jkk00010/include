@@ -59,6 +59,14 @@ typedef unsigned long int                                                size_t;
 #endif
 #endif
 
+#if __STDC_VERSION__ >= 201112
+struct timespec {
+	time_t tv_sec;	/* Seconds */
+	long tv_nsec;	/* Nanoseonds */
+};
+#endif
+
+
 
 #ifndef __TYPE_struct_tm_DEFINED__
 #define __TYPE_struct_tm_DEFINED__
@@ -76,39 +84,34 @@ struct tm {
 #endif
 
 char * asctime(const struct tm * __timeptr);
-#define asctime(__timeptr) \
-	__checked_p(__FILE__, __func__, __LINE__, asctime, __timeptr)
-
 clock_t clock(void);
-#define clock() \
-	__checked_clock(__FILE__, __func__, __LINE__, clock)
-
 char * ctime(const time_t * __timer);
-#define ctime(__timer) \
-	__checked_p(__FILE__, __func__, __LINE__, ctime, __timer)
-
 double difftime(time_t __time1, time_t __time0);
-#define difftime(__time1, __time0) \
-	__checked_d(__FILE__, __func__, __LINE__, difftime, __time1, __time2)
-
 struct tm * gmtime(const time_t * __timer);
-#define gmtime(__timer) \
-	__checked_p(__FILE__, __func__, __LINE__, gmtime, __timer)
-
 struct tm * localtime(const time_t * __timer);
-#define localtime(__timer) \
-	__checked_p(__FILE__, __func__, __LINE__, localtime, __timer)
-
 time_t mktime(struct tm * __timeptr);
-#define mktime(__timeptr) \
-	__checked_time(__FILE__, __func__, __LINE__, mktime, __timeptr)
-
 size_t strftime(char * restrict __s, size_t __maxsize, const char * restrict __format, const struct tm * restrict __timeptr);
-#define strftime(__s, __maxsize, __format, __timeptr) \
-	__checked_s(__FILE__, __func__, __LINE__, strftime, __s, __maxsize, __format, __timeptr)
-
 time_t time(time_t * __timer);
-#define time(__timer) \
-	__checked_time(__FILE__, __func__, __LINE__, time, __timer)
+
+#ifndef __UNG_INTERNAL__
+char * __asctime(const char *, const char *, unsigned long long, const struct tm * __timeptr);
+#define asctime(__t) __asctime(__FILE__, __func__, __LINE__, __t)
+clock_t __clock(const char *, const char *, unsigned long long);
+#define clock() __clock(__FILE__, __func__, __LINE__)
+char * __ctime(const char *, const char *, unsigned long long, const time_t * __timer);
+#define ctime(__t) __ctime(__FILE__, __func__, __LINE__, __t)
+double __difftime(const char *, const char *, unsigned long long, time_t __time1, time_t __time0);
+#define difftime(__t1, __t0) __difftime(__FILE__, __func__, __LINE__, __t1, __t0)
+struct tm * __gmtime(const char *, const char *, unsigned long long, const time_t * __timer);
+#define gmtime(__t) __gmtime(__FILE__, __func__, __LINE__, __t)
+struct tm * __localtime(const char *, const char *, unsigned long long, const time_t * __timer);
+#define localtime(__t) __localtime(__FILE__, __func__, __LINE__, __t)
+time_t __mktime(const char *, const char *, unsigned long long, struct tm * __timeptr);
+#define mktime(__t) __mktime(__FILE__, __func__, __LINE__, __t)
+size_t __strftime(const char *, const char *, unsigned long long, char * restrict __s, size_t __maxsize, const char * restrict __format, const struct tm * restrict __timeptr);
+#define strftime(__s, __m, __f, __t) __strftime(__FILE__, __func__, __LINE__, __s, __m, __f, __t)
+time_t __time(const char *, const char *, unsigned long long, time_t * __timer);
+#define time(__t) __asctime(__FILE__, __func__, __LINE__, __t)
+#endif
 
 #endif
