@@ -99,7 +99,7 @@
 #endif
 
 #ifdef restrict
-#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
+#if (defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L)
 #error Undefined Behavior: Keyword restrict is defined as a macro
 #undef restrict
 #endif
@@ -206,8 +206,10 @@
 #endif
 
 #ifdef _Noreturn
+#if (defined __STDC_VERSION__ && __STDC_VERSION__ >= 201112L)
 #error Undefined Behavior: Keyword _Noreturn is defined as a macro
 #undef _Noreturn
+#endif
 #endif
 
 #ifdef _Static_assert
@@ -220,21 +222,14 @@
 #undef _Thread_local
 #endif
 
-/* multiple-inclusion guard happens here so that keywords are always checked */
-#ifndef __UNG_H
-#define __UNG_H
-
-void __checked(const char *, const char *, unsigned long long, void(*)(), ...);
-int __checked_i(const char *, const char *, unsigned long long, int(*)(), ...);
-long __checked_l(const char *, const char *, unsigned long long, long(*)(), ...);
-void * __checked_p(const char *, const char *, unsigned long long, void *(*)(), ...);
-
 #if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)                 
 #define restrict                                                                
 #endif 
 
+#if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
+#define __func__ "unknown function"
+#endif
+
 #if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 200112L)                 
 #define _Noreturn                                                               
 #endif                                                                          
-
-#endif
