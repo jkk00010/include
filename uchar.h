@@ -8,20 +8,19 @@ typedef unsigned short                                                 char16_t;
 typedef unsigned int                                                   char32_t;
 
 size_t c16rtomb(char * restrict __s, char16_t __c16, mbstate_t * restrict __ps);
-#define c16rtomb(__s, __c16, __ps) \
-	__checked_s(__FILE__, __func__, __LINE__, c16rtomb, __s, __c16, __ps)
-
 size_t c32rtomb(char * restrict __s, char32_t __c32, mbstate_t * restrict __ps);
-#define c32rtomb(__s, __c32, __ps) \
-	__checked_s(__FILE__, __func__, __LINE__, c32rtomb, __s, __c32, __ps)
-
 size_t mbrtoc16(char16_t * restrict __pc16, const char * restrict __s, size_t __n, mbstate_t * restrict __ps);
-#define mbrtoc16(__pc16, __s, __n, __ps) \
-	__checked_s(__FILE__, __func__, __LINE__, mbrtoc16, __pc16, __s, __n, __ps)
-
 size_t mbrtoc32(char32_t * restrict __pc32, const char * restrict __s, size_t __n, mbstate_t * restrict __ps);
-#define mbrtoc32(__pc32, __s, __n, __ps) \
-	__checked_s(__FILE__, __func__, __LINE__, mbrtoc32, __pc32, __s, __n, __ps)
 
+#ifndef __UNG_INTERNAL__
+size_t __c16rtomb(const char *, const char *, unsigned long long, char * restrict __s, char16_t __c16, mbstate_t * restrict __ps);
+#define c16rtomb(__s, __c, __ps) __c16rtomb(__FILE__, __func__, __LINE__, __s, __c, __ps)
+size_t __c32rtomb(const char *, const char *, unsigned long long, char * restrict __s, char32_t __c32, mbstate_t * restrict __ps);
+#define c32rtomb(__s, __c, __ps) __c32rtomb(__FILE__, __func__, __LINE__, __s, __c, __ps)
+size_t __mbrtoc16(const char *, const char *, unsigned long long, char16_t * restrict __pc16, const char * restrict __s, size_t __n, mbstate_t * restrict __ps);
+#define mbrtoc16(__p, __s, __n, __ps) __mbrtoc16(__FILE__, __func__, __LINE__, __p, __s, __n, __ps)
+size_t __mbrtoc32(const char *, const char *, unsigned long long, char32_t * restrict __pc32, const char * restrict __s, size_t __n, mbstate_t * restrict __ps);
+#define mbrtoc32(__p, __s, __n, __ps) __mbrtoc32(__FILE__, __func__, __LINE__, __p, __s, __n, __ps)
+#endif
 
 #endif
