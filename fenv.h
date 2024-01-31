@@ -72,7 +72,7 @@ int __feclearexcept(const char *, const char *, unsigned long long, int);
 #define feclearexcept(__i) __feclearexcept(__FILE__, __func__, __LINE__, __i)
 int __fegetexceptflag(const char *, const char *, unsigned long long, fexcept_t *, int);
 #define fegetexceptflag(__e, __i) __fegetexceptflag(__FILE__, __func__, __LINE__, __e, __i)
-int __fegetround(const char *, const char *, unsigned long long)
+int __fegetround(const char *, const char *, unsigned long long);
 #define fegetround() __fegetround(__FILE__, __func__, __LINE__)
 int __feholdexcept(const char *, const char *, unsigned long long, fenv_t *);
 #define feclearexcept(__e) __feclearexcept(__FILE__, __func__, __LINE__, __e)
