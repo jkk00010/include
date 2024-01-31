@@ -72,49 +72,49 @@ char * strtok(char * restrict __s1, const char * restrict __s2);
 size_t strxfrm(char * restrict __s1, const char * restrict __s2, size_t __n);
 
 #ifndef __UNG_INTERNAL__
-void * __memchr(const void *__s, int __c, size_t __n);
+void * __memchr(const char *, const char *, unsigned long long, const void *__s, int __c, size_t __n);
 #define memchr(__s, __c, __n) __memchr(__FILE__, __func__, __LINE__, __s, __c, __n)
-int __memcmp(const void *__s1, const void *__s2, size_t __n);
+int __memcmp(const char *, const char *, unsigned long long, const void *__s1, const void *__s2, size_t __n);
 #define memcmp(__s1, __s2, __n) __memcmp(__FILE__, __func__, __LINE__, __s1, __s2, __n)
-void * __memcpy(void * restrict __s1, const void * restrict __s2, size_t __n);
+void * __memcpy(const char *, const char *, unsigned long long, void * restrict __s1, const void * restrict __s2, size_t __n);
 #define memcpy(__s1, __s2, __n) __memcpy(__FILE__, __func__, __LINE__, __s1, __s2, __n)
-void * __memmove(void *__s1, const void *__s2, size_t __n);
+void * __memmove(const char *, const char *, unsigned long long, void *__s1, const void *__s2, size_t __n);
 #define memmove(__s1, __s2, __n) __memmove(__FILE__, __func__, __LINE__, __s1, __s2, __n)
-void * __memset(void *__s, int __c, size_t __n);
+void * __memset(const char *, const char *, unsigned long long, void *__s, int __c, size_t __n);
 #define memset(__s, __c, __n) __memset(__FILE__, __func__, __LINE__, __s, __c, __n)
-char * __strcat(char * restrict __s1, const char * restrict __s2);
+char * __strcat(const char *, const char *, unsigned long long, char * restrict __s1, const char * restrict __s2);
 #define strcat(__s1, __s2) __strcat(__FILE__, __func__, __LINE__, __s1, __s2)
-char * __strchr(const char *__s, int __c);
+char * __strchr(const char *, const char *, unsigned long long, const char *__s, int __c);
 #define strchr(__s, __c) __strchr(__FILE__, __func__, __LINE__, __s, __c)
-int __strcmp(const char *__s1, const char *__s2);
+int __strcmp(const char *, const char *, unsigned long long, const char *__s1, const char *__s2);
 #define strcmp(__s1, __s2) __strcmp(__FILE__, __func__, __LINE__, __s1, __s2)
-int __strcoll(const char *__s1, const char *__s2);
+int __strcoll(const char *, const char *, unsigned long long, const char *__s1, const char *__s2);
 #define strcoll(__s1, __s2) __strcoll(__FILE__, __func__, __LINE__, __s1, __s2)
-char * __strcpy(char * restrict __s1, const char * restrict __s2);
+char * __strcpy(const char *, const char *, unsigned long long, char * restrict __s1, const char * restrict __s2);
 #define strcpy(__s1, __s2) __strcpy(__FILE__, __func__, __LINE__, __s1, __s2)
-size_t __strcspn(const char *__s1, const char *__s2);
+size_t __strcspn(const char *, const char *, unsigned long long, const char *__s1, const char *__s2);
 #define strcspn(__s1, __s2) __strcspn(__FILE__, __func__, __LINE__, __s1, __s2)
-char * __strerror(int __errnum);
+char * __strerror(const char *, const char *, unsigned long long, int __errnum);
 #define strerror(__e) __strerror(__FILE__, __func__, __LINE__, __e)
-size_t __strlen(const char *__s);
+size_t __strlen(const char *, const char *, unsigned long long, const char *__s);
 #define strlen(__s) __strlen(__FILE__, __func__, __LINE__, __s)
-char * __strncat(char * restrict __s1, const char * restrict __s2, size_t __n);
+char * __strncat(const char *, const char *, unsigned long long, char * restrict __s1, const char * restrict __s2, size_t __n);
 #define strncat(__s1, __s2, __n) __strncat(__FILE__, __func__, __LINE__, __s1, __s2, __n)
-int __strncmp(const char *__s1, const char *__s2, size_t __n);
+int __strncmp(const char *, const char *, unsigned long long, const char *__s1, const char *__s2, size_t __n);
 #define strncmp(__s1, __s2, __n) __strncmp(__FILE__, __func__, __LINE__, __s1, __s2, __n)
-char * __strncpy(char * restrict __s1, const char * restrict __s2, size_t __n);
+char * __strncpy(const char *, const char *, unsigned long long, char * restrict __s1, const char * restrict __s2, size_t __n);
 #define strncpy(__s1, __s2, __n) __strncpy(__FILE__, __func__, __LINE__, __s1, __s2, __n)
-char * __strpbrk(const char *__s1, const char *__s2);
+char * __strpbrk(const char *, const char *, unsigned long long, const char *__s1, const char *__s2);
 #define strpbrk(__s1, __s2) __strpbrk(__FILE__, __func__, __LINE__, __s1, __s2)
-char * __strrchr(const char *__s, int __c);
+char * __strrchr(const char *, const char *, unsigned long long, const char *__s, int __c);
 #define strrchr(__s, __c) __strrchr(__FILE__, __func__, __LINE__, __s, __c)
-size_t __strspn(const char *__s1, const char *__s2);
+size_t __strspn(const char *, const char *, unsigned long long, const char *__s1, const char *__s2);
 #define strspn(__s1, __s2) __strspn(__FILE__, __func__, __LINE__, __s1, __s2)
-char * __strstr(const char *__s1, const char *__s2);
+char * __strstr(const char *, const char *, unsigned long long, const char *__s1, const char *__s2);
 #define strstr(__s1, __s2) __strstr(__FILE__, __func__, __LINE__, __s1, __s2)
-char * __strtok(char * restrict __s1, const char * restrict __s2);
+char * __strtok(const char *, const char *, unsigned long long, char * restrict __s1, const char * restrict __s2);
 #define strtok(__s1, __s2) __strtok(__FILE__, __func__, __LINE__, __s1, __s2)
-size_t __strxfrm(char * restrict __s1, const char * restrict __s2, size_t __n);
+size_t __strxfrm(const char *, const char *, unsigned long long, char * restrict __s1, const char * restrict __s2, size_t __n);
 #define strxfrm(__s1, __s2, __n) __strxfrm(__FILE__, __func__, __LINE__, __s1, __s2, __n)
 #endif
 

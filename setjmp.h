@@ -41,9 +41,9 @@ _Noreturn void longjmp(jmp_buf, int);
 int setjmp(jmp_buf);
 
 #ifndef __UNG_INTERNAL__
-_Noreturn void longjmp(const char *, const char *, unsigned long long, jmp_buf, int);
+_Noreturn void __longjmp(const char *, const char *, unsigned long long, jmp_buf, int);
 #define longjmp(__b, __i) __longjmp(__FILE__, __func__, __LINE__, __b, __i)
-int setjmp(const char *, const char *, unsigned long long, jmp_buf);
+int __setjmp(const char *, const char *, unsigned long long, jmp_buf);
 #define setjmp(__b) __setjmp(__FILE__, __func__, __LINE__, __b)
 #endif
 
