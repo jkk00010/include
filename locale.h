@@ -87,9 +87,11 @@ struct lconv {
 struct lconv * localeconv(void);
 char * setlocale(int, const char *);
 
-#define localeconv() \
-	(struct lconv*)__checked_p(__FILE__, __func__, __LINE__, localeconv)
-#define setlocale(__i, __s) \
-	(char*)__checked_p(__FILE__, __func__, __LINE__, localeconv, __i, __s)
+#ifndef __UNG_INTERNAL__
+struct lconv * __localeconv(const char *, const char *, unsigned long long);
+#define localeconv() __localeconv(__FILE__, __func__, __LINE__)
+char * __setlocale(const char *, const char *, unsigned long long, int, const char *);
+#define setlocale(__i, __s) __localeconv(__FILE__, __func__, __LINE__, __i, __s)
+#endif
 
 #endif
