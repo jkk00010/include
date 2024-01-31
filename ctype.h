@@ -76,6 +76,8 @@ int __isxdigit(const char *, const char *, unsigned long long, int);
 #define isxdigit(__c) __isxdigit(__FILE__, __func__, __LINE__, __c)
 int __tolower(const char *, const char *, unsigned long long, int);
 #define tolower(__c) __tolower(__FILE__, __func__, __LINE__, __c)
+int __toupper(const char *, const char *, unsigned long long, int);
+#define toupper(__c) __toupper(__FILE__, __func__, __LINE__, __c)
 int __isblank(const char *, const char *, unsigned long long, int);
 #define isblank(__c) __isblank(__FILE__, __func__, __LINE__, __c)
 #endif
