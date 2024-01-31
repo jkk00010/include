@@ -57,44 +57,65 @@ typedef int                                                              wint_t;
 
 #if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
 int iswalnum(wint_t __wc);
-#define iswalnum(__wc) __checked_i(__FILE__, __func__, __LINE__, iswalnum, __wc)
 int iswalpha(wint_t __wc);
-#define iswalpha(__wc) __checked_i(__FILE__, __func__, __LINE__, iswalpha, __wc)
 int iswcntrl(wint_t __wc);
-#define iswcntrl(__wc) __checked_i(__FILE__, __func__, __LINE__, iswcntrl, __wc)
 int iswctype(wint_t __wc, wctype_t __desc);
-#define iswctype(__wc) __checked_i(__FILE__, __func__, __LINE__, iswctype, __wc)
 int iswdigit(wint_t __wc);
-#define iswdigit(__wc) __checked_i(__FILE__, __func__, __LINE__, iswdigit, __wc)
 int iswgraph(wint_t __wc);
-#define iswgraph(__wc) __checked_i(__FILE__, __func__, __LINE__, iswgraph, __wc)
 int iswlower(wint_t __wc);
-#define iswlower(__wc) __checked_i(__FILE__, __func__, __LINE__, iswlower, __wc)
 int iswprint(wint_t __wc);
-#define iswprint(__wc) __checked_i(__FILE__, __func__, __LINE__, iswprint, __wc)
 int iswpunct(wint_t __wc);
-#define iswpunct(__wc) __checked_i(__FILE__, __func__, __LINE__, iswpunct, __wc)
 int iswspace(wint_t __wc);
-#define iswspace(__wc) __checked_i(__FILE__, __func__, __LINE__, iswspace, __wc)
 int iswupper(wint_t __wc);
-#define iswupper(__wc) __checked_i(__FILE__, __func__, __LINE__, iswupper, __wc)
 int iswxdigit(wint_t __wc);
-#define iswxdigit(__wc) __checked_i(__FILE__, __func__, __LINE__, iswxdigit, __wc)
 wint_t towctrans(wint_t __wc, wctrans_t __desc);
-#define towctrans(__wc, __desc) __checked_i(__FILE__, __func__, __LINE__, towctrans, __wc, __desc)
 wint_t towlower(wint_t __wc);
-#define towlower(__wc) __checked_i(__FILE__, __func__, __LINE__, towlower, __wc)
 wint_t towupper(wint_t __wc);
-#define towupper(__wc) __checked_i(__FILE__, __func__, __LINE__, towupper, __wc)
 wctrans_t wctrans(const char * __property);
-#define wctrans(__p) __checked_i(__FILE__, __func__, __LINE__, wctrans, __p)
 wctype_t wctype(const char * __property);
-#define wctype(__p) __checked_i(__FILE__, __func__, __LINE__, wctype, __p)
 #endif
 
 #if	(defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__)
 int iswblank(wint_t __wc);
-#define iswblank(__wc) __checked_i(__FILE__, __func__, __LINE__, iswblank, __wc)
+#endif
+
+#ifndef __UNG_INTERNAL__
+int __iswalnum(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswalnum(__wc) __iswalnum(__FILE__, __func__, __LINE__, __wc)
+int __iswalpha(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswalpha(__wc) __iswalpha(__FILE__, __func__, __LINE__, __wc)
+int __iswblank(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswblank(__wc) __iswblank(__FILE__, __func__, __LINE__, __wc)
+int __iswcntrl(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswcntrl(__wc) __iswcntrl(__FILE__, __func__, __LINE__, __wc)
+int __iswctype(const char *, const char *, unsigned long long, wint_t __wc, wctype_t __desc);
+#define iswctype(__wc, __d) __iswctype(__FILE__, __func__, __LINE__, __wc, __d)
+int __iswdigit(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswdigit(__wc) __iswdigit(__FILE__, __func__, __LINE__, __wc)
+int __iswgraph(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswgraph(__wc) __iswgraph(__FILE__, __func__, __LINE__, __wc)
+int __iswlower(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswlower(__wc) __iswlower(__FILE__, __func__, __LINE__, __wc)
+int __iswprint(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswprint(__wc) __iswprint(__FILE__, __func__, __LINE__, __wc)
+int __iswpunct(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswpunct(__wc) __iswpunct(__FILE__, __func__, __LINE__, __wc)
+int __iswspace(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswspace(__wc) __iswspace(__FILE__, __func__, __LINE__, __wc)
+int __iswupper(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswupper(__wc) __iswupper(__FILE__, __func__, __LINE__, __wc)
+int __iswxdigit(const char *, const char *, unsigned long long, wint_t __wc);
+#define iswxdigit(__wc) __iswxdigit(__FILE__, __func__, __LINE__, __wc)
+wint_t __towctrans(const char *, const char *, unsigned long long, wint_t __wc, wctrans_t __desc);
+#define towctrans(__wc, __d) __towctrans(__FILE__, __func__, __LINE__, __wc, __d)
+wint_t __towlower(const char *, const char *, unsigned long long, wint_t __wc);
+#define towlower(__wc) __towlower(__FILE__, __func__, __LINE__, __wc)
+wint_t __towupper(const char *, const char *, unsigned long long, wint_t __wc);
+#define towupper(__wc) __towupper(__FILE__, __func__, __LINE__, __wc)
+wctrans_t __wctrans(const char *, const char *, unsigned long long, const char * __property);
+#define wctrans(__prop) __wctrans(__FILE__, __func__, __LINE__, __prop)
+wctype_t __wctype(const char *, const char *, unsigned long long, const char * __property);
+#define wctype(__prop) __wctype(__FILE__, __func__, __LINE__, __prop)
 #endif
 
 #endif
