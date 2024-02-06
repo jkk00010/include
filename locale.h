@@ -91,7 +91,7 @@ char * setlocale(int, const char *);
 struct lconv * __localeconv(const char *, const char *, unsigned long long);
 #define localeconv() __localeconv(__FILE__, __func__, __LINE__)
 char * __setlocale(const char *, const char *, unsigned long long, int, const char *);
-#define setlocale(__i, __s) __localeconv(__FILE__, __func__, __LINE__, __i, __s)
+#define setlocale(__i, __s) __setlocale(__FILE__, __func__, __LINE__, __i, __s)
 #endif
 
 #endif
