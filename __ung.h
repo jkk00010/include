@@ -233,3 +233,14 @@
 #if (!defined __STDC_VERSION__) || (__STDC_VERSION__ < 200112L)                 
 #define _Noreturn                                                               
 #endif                                                                          
+
+/* TODO: __clang__ */
+
+#ifdef __GNUC__
+#pragma GCC diagnostic error "-Wcast-qual"
+#pragma GCC diagnostic error "-Wformat"
+#pragma GCC diagnostic error "-Wincompatible-pointer-type"
+#pragma GCC diagnostic error "-Wnonnull"
+#pragma GCC diagnostic error "-Wuninitialized"
+#pragma GCC diagnostic error "-Wuse-after-free"
+#endif
