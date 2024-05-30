@@ -92,7 +92,7 @@ int __mtx_unlock(const char *, const char *, unsigned long long, mtx_t *__mtx);
 int __thrd_create(const char *, const char *, unsigned long long, thrd_t *__thr, thrd_start_t __func, void *__arg);
 #define thrd_create(__t, __f, __a) __thrd_create(__FILE__, __func__, __LINE__, __fl, __t, __f, __a)
 thrd_t __thrd_current(const char *, const char *, unsigned long long);
-#define thrd_current() __thrd_current(__FILE__, __func__, __LINE__, __t)
+#define thrd_current() __thrd_current(__FILE__, __func__, __LINE__)
 int __thrd_detach(const char *, const char *, unsigned long long, thrd_t __thr);
 #define thrd_detach(__t) __thrd_detach(__FILE__, __func__, __LINE__, __t)
 int __thrd_equal(const char *, const char *, unsigned long long, thrd_t __thr0, thrd_t __thr1);
