@@ -33,12 +33,12 @@ SOFTWARE.
 
 #include <__ung.h>
 
-#define LC_ALL                                                               (0)
-#define LC_COLLATE                                                           (1)
-#define LC_CTYPE                                                             (2)
-#define LC_MONETARY                                                          (3)
-#define LC_NUMERIC                                                           (4)
-#define LC_TIME                                                              (5)
+#define LC_ALL                                                               (6)
+#define LC_COLLATE                                                           (3)
+#define LC_CTYPE                                                             (0)
+#define LC_MONETARY                                                          (4)
+#define LC_NUMERIC                                                           (1)
+#define LC_TIME                                                              (2)
 #define NULL                                                          ((void*)0)
 
 #if (defined _POSIX_C_SOURCE && 2 <= _POSIX_C_SOURCE)
