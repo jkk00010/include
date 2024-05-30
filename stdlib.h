@@ -92,19 +92,31 @@ int atoi(const char * __nptr);
 long int atol(const char * __nptr);
 void * bsearch(const void * __key, const void * __base, size_t __nmemb, size_t __size, int (*__compar)(const void *, const void*));
 void * calloc(size_t __nmemb, size_t __size);
+void * __calloc(const char *, const char *, unsigned long long, size_t, size_t);
+#define calloc(__n, __s) __calloc(__FILE__, __func__, __LINE__, __n, __s)
+
 div_t div(int __numer, int __denom);
 _Noreturn void exit(int __status);
 void free(void * __ptr);
+void __free(const char *, const char *, unsigned long long, void *);
+#define free(__p) __free(__FILE__, __func__, __LINE__, __p)
+
 char * getenv(const char * __name);
 long int labs(long int __j);
 ldiv_t ldiv(long int __numer, long int __denom);
 void * malloc(size_t __size);
+void * __malloc(const char *, const char *, unsigned long long, size_t);
+#define malloc(__n) __malloc(__FILE__, __func__, __LINE__, __n)
+
 int mblen(const char * __s, size_t __n);
 size_t mbstowcs(wchar_t * restrict __pwcs, const char * restrict __s, size_t __n);
 int mbtowc(wchar_t * restrict __pwc, const char * restrict __s, size_t __n);
 void qsort(void * __base, size_t __nmemb, size_t __size, int (*__compar)(const void *, const void *));
 int rand(void);
 void * realloc(void * __ptr, size_t __size);
+void * __realloc(const char *, const char *, unsigned long long, void *, size_t);
+#define realloc(__p, __s) __realloc(__FILE__, __func__, __LINE__, __p, __s)
+
 void srand(unsigned int __seed);
 double strtod(const char * restrict __nptr, char ** restrict __endptr);
 long int strtol(const char * restrict __nptr, char ** restrict __endptr, int __base);
