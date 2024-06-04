@@ -40,12 +40,12 @@ SOFTWARE.
 #if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
 #ifndef __TYPE_wctrans_t_DEFINED__
 #define __TYPE_wctrans_t_DEFINED__
-typedef int                                                           wctrans_t;
+typedef unsigned int                                                  wctrans_t;
 #endif
 
 #ifndef __TYPE_wctype_t_DEFINED__
 #define __TYPE_wctype_t_DEFINED__
-typedef int                                                            wctype_t;
+typedef unsigned int                                                   wctype_t;
 #endif
 
 #ifndef __TYPE_wint_t_DEFINED__
