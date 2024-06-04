@@ -111,10 +111,17 @@ SOFTWARE.
 /* ./src/math/NAN.c */
 #define NAN           0.0                           /* TODO: float quiet NaN */
 /* ./src/math/fpclassify.c */
+int __fpclassify_error(void);
+/*
 #define fpclassify(__x) \
 	              ((sizeof (__x) == sizeof (float)) ? __fpclassifyf(__x) : \
 		       (sizeof (__x) == sizeof (double)) ? __fpclassify(__x) : \
-		                                          __fpclassifyl(__x))
+		       (sizeof (__x) == sizeof (long double) ? __fpclassifyl(__x) : \
+                       __fpclassify_error()))
+*/
+#define fpclassify(__x) _Generic((__x),	float : __fpclassifyf, \
+					double : __fpclassify, \
+					long double : __fpclassifyl)(__x)
 /* ./src/math/isfinite.c */
 #define isfinite(__x)                           (fpclassify(__x) != FP_INFINITE)
 /* ./src/math/isgreater.c */
