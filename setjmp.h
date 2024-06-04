@@ -38,13 +38,15 @@ SOFTWARE.
 typedef unsigned long int                                           jmp_buf[32];
 
 _Noreturn void longjmp(jmp_buf, int);
-int setjmp(jmp_buf);
+int __setjmp(jmp_buf);
 
-#ifndef __UNG_INTERNAL__
+#ifdef __UNG_INTERNAL__
+#define setjmp(__b) __setjmp(__b)
+#else
 _Noreturn void __longjmp(const char *, const char *, unsigned long long, jmp_buf, int);
 #define longjmp(__b, __i) __longjmp(__FILE__, __func__, __LINE__, __b, __i)
-int __setjmp(const char *, const char *, unsigned long long, jmp_buf);
-#define setjmp(__b) __setjmp(__FILE__, __func__, __LINE__, __b)
+int ____setjmp(const char *, const char *, unsigned long long, jmp_buf);
+#define setjmp(__b) ____setjmp(__FILE__, __func__, __LINE__, __b)
 #endif
 
 #if (defined _POSIX_SOURCE)
