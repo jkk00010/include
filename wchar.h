@@ -43,7 +43,7 @@ SOFTWARE.
 #if	(defined __STDC_VERSION__ && 199409 <= __STDC_VERSION__)
 #ifndef __TYPE_mbstate_t_DEFINED__
 #define __TYPE_mbstate_t_DEFINED__
-typedef int                                                           mbstate_t;
+typedef struct { struct __mbstate_t *__impl; }                        mbstate_t;
 #endif
 
 #ifndef __TYPE_struct_tm_DEFINED__
@@ -101,7 +101,7 @@ wint_t getwchar(void);
 size_t mbrlen(const char * restrict __s, size_t __n, mbstate_t * restrict __ps);
 size_t mbrtowc(wchar_t * restrict __pwc, const char * restrict __s, size_t __n, mbstate_t * restrict __ps);
 int mbsinit(const mbstate_t * __ps);
-size_t mbsrtowcs(wchar_t * restrict __dst, const char * restrict __src, size_t __len, mbstate_t * restrict __ps);
+size_t mbsrtowcs(wchar_t * restrict __dst, const char ** restrict __src, size_t __len, mbstate_t * restrict __ps);
 wint_t putwc(wchar_t __c, FILE * __stream);
 wint_t putwchar(wchar_t __c);
 int swprintf(wchar_t * restrict __s, size_t __n, const wchar_t * restrict __format, ...);
