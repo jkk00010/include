@@ -45,7 +45,7 @@ SOFTWARE.
 #define FE_UNDERFLOW                                                      (1<<4)
 #define FE_UPWARD                                                            (2)
 
-typedef unsigned long long int                                           fenv_t;
+typedef struct { struct __fenv_t *__impl; }                              fenv_t;
 typedef unsigned long long int                                        fexcept_t;
 
 int feclearexcept(int);
