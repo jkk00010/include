@@ -57,7 +57,7 @@ typedef struct __FILE                                                      FILE;
 
 #ifndef __TYPE_fpos_t_DEFINED__
 #define __TYPE_fpos_t_DEFINED__
-typedef struct __fpos_t *                                                fpos_t;
+typedef struct { struct __fpos_t *__impl; }                              fpos_t;
 #endif
 
 #ifndef __TYPE_va_list_DEFINED__

@@ -46,7 +46,7 @@ SOFTWARE.
 #define FE_UPWARD                                                            (2)
 
 typedef struct { struct __fenv_t *__impl; }                              fenv_t;
-typedef unsigned long long int                                        fexcept_t;
+typedef struct { struct __fexcept_t *__impl; }                        fexcept_t;
 
 int feclearexcept(int);
 int fegetenv(fenv_t *);
